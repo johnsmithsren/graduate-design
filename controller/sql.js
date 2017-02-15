@@ -10,7 +10,7 @@ sqltest = (function() {
         this.model = new model();
     }
     sqltest.prototype.sqlselect = function(req, res) {
-        return sqlMod.sqlselect(req.query, function(result) {
+        return sqlMod.sqlselect(req.body, function(result) {
             return res.send('hello');
         });
     };

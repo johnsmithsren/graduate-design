@@ -6,7 +6,7 @@ sqlMod = (function() {
     function sqlMod(options) {
         this.options = options;
     }
-    sqlMod.prototype.sqlselect  = function(options, cb) {
+    sqlMod.prototype.sqlselect= function(options, cb) {
         return cb({
             err: 0
         });
