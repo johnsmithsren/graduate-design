@@ -7,6 +7,9 @@
 var app = require('../app');
 var debug = require('debug')('myapp:server');
 var http = require('http');
+var express = require('express');
+var router = express.Router();
+var logger=require('logger');
 
 /**
  * Get port from environment and store in Express.
@@ -18,14 +21,22 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-
+//require('../routes/routers')(app,router);
 var server = http.createServer(app);
 
+try {
+  server.listen(app.get('port'), function() {
+    return console.log('Express 服务已启动，监听端口：' + app.get('port'));
+  });
+} catch (_error) {
+  e = _error;
+  console.log(e);
+}
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+//server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
 

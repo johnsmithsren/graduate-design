@@ -1,7 +1,11 @@
 /**
  * Created by renjm on 17/2/15.
  */
+var allctrls,_j
 var mysql=require('mysql');
+var fs=require('fs');
+var ctrls,ctrl;
+var path=require('path');
 var connection=mysql.createConnection({
     host:'115.159.71.162',
     user:'root',
@@ -10,9 +14,6 @@ var connection=mysql.createConnection({
     database:'bishe'
 });
 exports.login = function(req, res) {
-    console.log('####');
-    console.log(req);
-    console.log(res);
     res.render('index',{ title: 'jim black' });
 };
 exports.select = function(req,res) {
@@ -24,3 +25,14 @@ exports.select = function(req,res) {
     });
     connection.end();
 };
+allctrls = fs.readdirSync(__dirname);
+for (_j = 0, _len = allctrls.length; _j < _len; _j++) {
+    ctrls = allctrls[_j];
+    if ((path.extname(ctrls) === ".js" && ctrls !== 'index.js')) {
+        console.log('#####');
+        console.log(ctrls);
+        ctrls = allctrls[_j];
+        ctrl = require(path.join(__dirname, ctrls));
+        module.exports[ctrls.split('.')[0]] = new ctrl();
+    }
+}
