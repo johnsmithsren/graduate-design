@@ -11,7 +11,7 @@ sqltest = (function() {
     }
     sqltest.prototype.sqlselect = function(req, res) {
         return sqlMod.sqlselect(req.body, function(result) {
-            return res.send('hello');
+            return res.send(result);
         });
     };
     return sqltest;

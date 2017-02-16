@@ -1,0 +1,52 @@
+/**
+ * Created by renjm on 17/2/16.
+ */
+var qr=require('qr-image');
+var url=require('url');
+var model = require('../model/qr_codeMod');
+var qr_codeMod=new model();
+var qr_code;
+//exports.getcode = function(req, res) {
+//    var text = url.parse(req.url, true).query.text;
+//    console.log('#####');
+//    console.log(req.query);
+//    console.log(req.query.text);
+//    try {
+//        var img = qr.image(text,{size :10});
+//        res.writeHead(200, {'Content-Type': 'image/png'});
+//        img.pipe(res);
+//    } catch (e) {
+//        res.writeHead(414, {'Content-Type': 'text/html'});
+//        res.end('<h1>414 Request-URI Too Large</h1>');
+//    }
+//};
+qr_code = (function() {
+    function qr_code(options) {
+        this.options = options;
+    }
+    qr_code.prototype.getcode= function(req, res) {
+        var text='hello world';
+        var img = qr.image(text,{size :10});
+        res.writeHead(200, {'Content-Type': 'image/png'});
+        img.pipe(res);
+        return qr_codeMod.getcode(req.query, function(result) {
+            return res.send('hello world');
+        });
+    };
+    //        var text = url.parse(req.url, true).query.text;
+    //        console.log('#####');
+    //        console.log(req.query);
+    //        console.log(req.query.text);
+    //        try {
+    //            var img = qr.image(text,{size :10});
+    //            res.writeHead(200, {'Content-Type': 'image/png'});
+    //            img.pipe(res);
+    //        } catch (e) {
+    //            res.writeHead(414, {'Content-Type': 'text/html'});
+    //            res.end('<h1>414 Request-URI Too Large</h1>');
+    //        }
+    //};
+    return qr_code;
+
+})();
+module.exports = qr_code;

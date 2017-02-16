@@ -3,7 +3,7 @@
  */
 var sqlMod;
 var util=require('../libs/utils');
-var logger=require('logger');
+var logger=require('logger').createLogger();
 sqlMod = (function() {
     function sqlMod(options) {
         this.options = options;
@@ -12,10 +12,11 @@ sqlMod = (function() {
         sql='select * from account';
         return util.queryDatabase(sql, [], function(err, result) {
             if (err) {
-                return logger.error("update aliyun kp failed:", err);
+                return logger.error("failed:", err);
             }
-            console.log('#####');
-            console.log(result);
+            return cb({
+                data: result
+            });
         });
     };
     return sqlMod;

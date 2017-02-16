@@ -6,32 +6,43 @@ var mysql=require('mysql');
 var fs=require('fs');
 var ctrls,ctrl;
 var path=require('path');
-var connection=mysql.createConnection({
-    host:'115.159.71.162',
-    user:'root',
-    password:'qwe123123',
-    port:'3306',
-    database:'bishe'
-});
+var qr=require('qr-image');
+var url=require('url');
+//var connection=mysql.createConnection({
+//    host:'115.159.71.162',
+//    user:'root',
+//    password:'qwe123123',
+//    port:'3306',
+//    database:'bishe'
+//});
 exports.login = function(req, res) {
     res.render('index',{ title: 'jim black' });
 };
-exports.select = function(req,res) {
-    connection.connect();
-    connection.query('select * from account',function(err,rows,fields){
-        if (err) throw err;
-        console.log('the solution is',rows);
-        res.render('index',{title: rows[0].account});
-    });
-    connection.end();
-};
+//exports.select = function(req,res) {
+//    connection.connect();
+//    connection.query('select * from account',function(err,rows,fields){
+//        if (err) throw err;
+//        console.log('the solution is',rows);
+//        res.render('index',{title: rows[0].account});
+//    });
+//    connection.end();
+//};
+//exports.get_code = function(req, res) {
+//    var text = url.parse(req.url, true).query.text;
+//    text='hello world';
+//    try {
+//        var img = qr.image(text,{size :10});
+//        res.writeHead(200, {'Content-Type': 'image/png'});
+//        img.pipe(res);
+//    } catch (e) {
+//        res.writeHead(414, {'Content-Type': 'text/html'});
+//        res.end('<h1>414 Request-URI Too Large</h1>');
+//    }
+//};
 allctrls = fs.readdirSync(__dirname);
 for (_j = 0, _len = allctrls.length; _j < _len; _j++) {
     ctrls = allctrls[_j];
-    if ((path.extname(ctrls) === ".js" && ctrls !== 'index.js')) {
-        console.log('#####');
-        console.log(ctrls);
-        ctrls = allctrls[_j];
+    if ((path.extname(ctrls) === ".js" && ctrls !== 'index.js' && ctrls !== 'map.js')) {
         ctrl = require(path.join(__dirname, ctrls));
         module.exports[ctrls.split('.')[0]] = new ctrl();
     }

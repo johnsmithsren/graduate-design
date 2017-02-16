@@ -4,7 +4,7 @@
 var Q=require('q');
 var async=require('async');
 var mysql=require('mysql');
-var logger=require('logger');
+var logger=require('logger').createLogger();
 var _=require('underscore');
 
 createConnectionPool = _.once(function() {
@@ -31,7 +31,7 @@ exports.queryDatabase = function(sql, options, cb) {
             return pool.query(sql, options, callback);
         });
     }).then(function(result) {
-        return cb(null, result);
+        return cb(null, result[0]);
     }).fail(cb);
-    return logger.info(mysql.format(sql, options));
+    return logger.info('hello','world');
 };
