@@ -24,13 +24,10 @@ exports.login = function(req, res) {
         sql='select * from account';
         return Q.nfcall(util.queryDatabase, sql, []);
     }).then(function(result) {
-        console.log('#####1231');
-        console.log(result[0].account);
         res.render('index',{ title: 'jim black',name:result[0].account });
     }).fail(function(err) {
         return logger.error("failed:", err);
     });
-
     //console.log('#####1231');
     //console.log(test[0].account);
     //res.render('index',{ title: 'jim black',name:test[0].account });

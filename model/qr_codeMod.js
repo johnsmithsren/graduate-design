@@ -11,9 +11,6 @@ getQrcode = (function() {
     getQrcode.prototype.getcode = function(options, cb) {
         return async.waterfall([
             function(callback) {
-                console.log('hello world');
-                console.log('#####');
-                console.log(options);
             }
         ], function(err, result) {
             if (err) {
