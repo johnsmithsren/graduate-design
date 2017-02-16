@@ -2,6 +2,7 @@ extends layout
 
 block content
   h1= title
+  p.hello hello world #{name}
   p Welcome to #{title}
   div(id='allmap')
   img(id='qr_code' src="/getcode?text=http://localhost:3000/")

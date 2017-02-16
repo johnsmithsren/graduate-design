@@ -1,13 +1,16 @@
 /**
  * Created by renjm on 17/2/15.
  */
-var allctrls,_j
+var allctrls,_j;
 var mysql=require('mysql');
 var fs=require('fs');
 var ctrls,ctrl;
 var path=require('path');
 var qr=require('qr-image');
+var logger=require('logger').createLogger();
 var url=require('url');
+var Q=require('q');
+var util=require('../libs/utils');
 //var connection=mysql.createConnection({
 //    host:'115.159.71.162',
 //    user:'root',
@@ -16,7 +19,21 @@ var url=require('url');
 //    database:'bishe'
 //});
 exports.login = function(req, res) {
-    res.render('index',{ title: 'jim black' });
+    return Q.fcall(function() {
+        var sql;
+        sql='select * from account';
+        return Q.nfcall(util.queryDatabase, sql, []);
+    }).then(function(result) {
+        console.log('#####1231');
+        console.log(result[0].account);
+        res.render('index',{ title: 'jim black',name:result[0].account });
+    }).fail(function(err) {
+        return logger.error("failed:", err);
+    });
+
+    //console.log('#####1231');
+    //console.log(test[0].account);
+    //res.render('index',{ title: 'jim black',name:test[0].account });
 };
 //exports.select = function(req,res) {
 //    connection.connect();
