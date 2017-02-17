@@ -29,9 +29,9 @@ qr_code = (function() {
         var img = qr.image(text,{size :10});
         res.writeHead(200, {'Content-Type': 'image/png'});
         img.pipe(res);
-        return qr_codeMod.getcode(req.query, function(result) {
-            return res.send('hello world');
-        });
+        //return qr_codeMod.getcode(req.query, function(result) {
+        //    return res.send(result);
+        //});
     };
     //        var text = url.parse(req.url, true).query.text;
     //        console.log('#####');

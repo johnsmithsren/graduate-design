@@ -35,6 +35,9 @@ exports.login = function(req, res) {
 exports.log = function(req, res) {
         res.render('login');
 };
+exports.sign_up = function(req, res) {
+    res.render('sign_up');
+};
 //exports.select = function(req,res) {
 //    connection.connect();
 //    connection.query('select * from account',function(err,rows,fields){

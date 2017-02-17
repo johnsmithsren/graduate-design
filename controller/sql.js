@@ -15,6 +15,13 @@ sqltest = (function() {
             return res.send(result);
         });
     };
+    sqltest.prototype.userinsert = function(req, res) {
+        console.log('######');
+        console.log(req.body);
+        return sqlMod.userinsert(req.body, function(result) {
+            return res.send(result);
+        });
+    };
     return sqltest;
 })();
 module.exports = sqltest;
