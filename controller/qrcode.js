@@ -25,7 +25,7 @@ qr_code = (function() {
         this.options = options;
     }
     qr_code.prototype.getcode= function(req, res) {
-        var text='hello world';
+        var text='https://www.baidu.com/';
         var img = qr.image(text,{size :10});
         res.writeHead(200, {'Content-Type': 'image/png'});
         img.pipe(res);

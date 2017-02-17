@@ -6,7 +6,8 @@ var async=require('async');
 var mysql=require('mysql');
 var logger=require('logger').createLogger();
 var _=require('underscore');
-
+var memcached=require('memjs');
+var client = memcached.Client.create()
 createConnectionPool = _.once(function() {
     return mysql.createPool({
         host:'115.159.71.162',
@@ -34,4 +35,25 @@ exports.queryDatabase = function(sql, options, cb) {
         return cb(null, result[0]);
     }).fail(cb);
     return logger.info('hello','world');
+};
+exports.setmemcached = function(key, value, cb) {
+    return client.set(key, value, function(err, result) {
+        if (cb) {
+            cb(err, result);
+        }
+        if (err) {
+            return logger.error('Set memcached failed:', err);
+        }
+    }, exptime);
+};
+
+exports.getmemcached = function(key, cb) {
+    return client.get(key, function(err, value, key) {
+        if (cb) {
+            cb(err, value, key);
+        }
+        if (err) {
+            return logger.error('Get memcached failed:', err);
+        }
+    });
 };

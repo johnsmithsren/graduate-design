@@ -30,7 +30,9 @@ $(document).ready(function(){
                         console.log(data3);
                         //$("#sign_in").val("Success");
                         //alert("用户或密码错误！");
-                        //window.location.href='/';
+                        window.opener.location="javascript:reloadPage();";
+                        window.opener=null;
+                        window.close();
                     }
                 }
             });

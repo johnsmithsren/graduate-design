@@ -6,6 +6,8 @@ var util=require('../libs/utils');
 var logger=require('logger').createLogger();
 var _=require('underscore');
 var Q=require('q');
+var memcached = require('memjs');
+var mem = memcached.Client.create('localhost'+ ':' + '11211');
 sqlMod = (function() {
     function sqlMod(options) {
         this.options = options;
@@ -45,6 +47,57 @@ sqlMod = (function() {
             }
 
         }).fail(function(err) {
+            return logger.error("failed:", err);
+        });
+
+    };
+    sqlMod.prototype.user_verify= function(options, cb) {
+        return Q.fcall(function() {
+            var sql;
+            sql='select pwd from account where name=?';
+            return Q.nfcall(util.queryDatabase, sql, [options.name]);
+        }).then(function(result) {
+            if(result.length){
+                var pass=result[0].pwd;
+                var follow_pass=options.pwd;
+                if (pass != follow_pass)
+                    return cb({
+                        err: "password or name wrong"
+                    });
+                else
+                {
+                    mem.set('user_name', options.name, function(err, result) {
+                        if (err) {
+                            return {err:0}
+                        }
+                        else
+                        {
+                            return {mes:'ok'}
+                        }
+                    },3600*24);
+                    mem.set('pwd', result[0].pwd, function(err, result) {
+                        if (err) {
+                            return {err:0}
+                        }
+                        else
+                        {
+                            return {mes:'ok'}
+                        }
+                    },3600*24);
+                    return cb({
+                        data: "welcome"
+                    });
+                }
+            }
+            else{
+                return cb({
+                    err: "password or name wrong"
+                });
+            }
+        }).fail(function(err) {
+            return cb({
+                err: "inner failed"
+            });
             return logger.error("failed:", err);
         });
 

@@ -37,11 +37,11 @@ html
             .avtar
                 img(src='images/avtar.png')
             form
-                input.text(type='text', value='Username', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Username';}")
+                input.text(id='username' type='text', value='Username', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Username';}")
                 .key
-                    input(type='password', value='Password', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Password';}")
+                    input(id='password' type='password', value='Password', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Password';}")
             .signin
-                input(type='submit', value='Login')
+                input(id='sign_in' type='submit', value='Login')
             .signup
                 button(type='button',value='SignUp') SignUp
         .copy-rights

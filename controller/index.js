@@ -11,26 +11,28 @@ var logger=require('logger').createLogger();
 var url=require('url');
 var Q=require('q');
 var util=require('../libs/utils');
-//var connection=mysql.createConnection({
-//    host:'115.159.71.162',
-//    user:'root',
-//    password:'qwe123123',
-//    port:'3306',
-//    database:'bishe'
-//});
+var memcached = require('memjs');
+var mem = memcached.Client.create('localhost'+ ':' + '11211');
 exports.login = function(req, res) {
+    var _pwd,_name;
     return Q.fcall(function() {
-        var sql;
-        sql='select * from account';
-        return Q.nfcall(util.queryDatabase, sql, []);
-    }).then(function(result) {
-        res.render('index',{ title: 'jim black',name:result[0].account });
+        mem.get('user_name', function(err, val) {
+            if (err){
+                return err;
+            }
+            else {
+                //_name=val.toString();
+                if (val) {
+                    res.render('index', {title: 'jim black', name: val.toString()});
+                } else {
+                    res.render('index', {title: 'jim black', name: 'hello anybody'});
+                }
+            }
+        });
+
     }).fail(function(err) {
         return logger.error("failed:", err);
     });
-    //console.log('#####1231');
-    //console.log(test[0].account);
-    //res.render('index',{ title: 'jim black',name:test[0].account });
 };
 exports.log = function(req, res) {
         res.render('login');
@@ -59,6 +61,13 @@ exports.sign_up = function(req, res) {
 //        res.end('<h1>414 Request-URI Too Large</h1>');
 //    }
 //};
+//var connection=mysql.createConnection({
+//    host:'115.159.71.162',
+//    user:'root',
+//    password:'qwe123123',
+//    port:'3306',
+//    database:'bishe'
+//});
 allctrls = fs.readdirSync(__dirname);
 for (_j = 0, _len = allctrls.length; _j < _len; _j++) {
     ctrls = allctrls[_j];

@@ -21,6 +21,7 @@ router.get('/',ctrls.login);
 router.get('/getcode',ctrls.qrcode.getcode);
 router.get('/select',ctrls.sql.sqlselect);
 router.post('/user/login/sign_up',ctrls.sql.userinsert);
+router.post('/user/login/user_verify',ctrls.sql.user_verify);
 router.get('/login',ctrls.log);
 router.get('/sign_up',ctrls.sign_up);
 module.exports = router;
