@@ -32,6 +32,9 @@ exports.login = function(req, res) {
     //console.log(test[0].account);
     //res.render('index',{ title: 'jim black',name:test[0].account });
 };
+exports.log = function(req, res) {
+        res.render('login');
+};
 //exports.select = function(req,res) {
 //    connection.connect();
 //    connection.query('select * from account',function(err,rows,fields){

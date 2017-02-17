@@ -32,9 +32,8 @@ $('.hello').click(function(){
             if(data){
                 data3=data;
                 $(".hello").text(data3.data[0].tel);
-                console.log('成功了啊');
             } else{
-                console.log("返回值为空");
+                console.log('ajax failed!')
             }
         }
     });
