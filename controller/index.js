@@ -40,6 +40,12 @@ exports.log = function(req, res) {
 exports.sign_up = function(req, res) {
     res.render('sign_up');
 };
+exports.to_dashboard = function(req, res) {
+    res.render('dashboard');
+};
+exports.to_chart = function(req, res) {
+    res.render('chart');
+};
 //exports.select = function(req,res) {
 //    connection.connect();
 //    connection.query('select * from account',function(err,rows,fields){

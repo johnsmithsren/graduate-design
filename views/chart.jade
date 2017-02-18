@@ -1,0 +1,138 @@
+//
+   Created by renjm on 17/2/18.
+
+doctype html
+html
+   head
+      meta(charset='utf-8')
+      meta(name='viewport', content='width=device-width, initial-scale=1')
+      title JIM - Black
+      link(href='/css/bootstrap.min.css', rel='stylesheet')
+      link(href='/css/datepicker3.css', rel='stylesheet')
+      link(href='/css/styles.css', rel='stylesheet')
+   body
+      nav.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+         .container-fluid
+            .navbar-header
+               button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#sidebar-collapse')
+                  span.sr-only Toggle navigation
+                  span.icon-bar
+                  span.icon-bar
+                  span.icon-bar
+               a.navbar-brand(href='#')
+                  span Lumino
+                  | Admin
+               ul.user-menu
+                  li.dropdown.pull-right
+                     a.dropdown-toggle(href='#', data-toggle='dropdown')
+                        span.glyphicon.glyphicon-user
+                        |  User
+                        span.caret
+                     ul.dropdown-menu(role='menu')
+                        li
+                           a(href='#')
+                              span.glyphicon.glyphicon-user
+                              |  Profile
+                        li
+                           a(href='#')
+                              span.glyphicon.glyphicon-cog
+                              |  Settings
+                        li
+                           a(href='#')
+                              span.glyphicon.glyphicon-log-out
+                              |  Logout
+      #sidebar-collapse.col-sm-3.col-lg-2.sidebar
+         form(role='search')
+            .form-group
+               input.form-control(type='text', placeholder='Search')
+         ul.nav.menu
+            li
+               a(href='dashboard')
+                  span.glyphicon.glyphicon-dashboard
+                  |  Dashboard
+            li.active
+               a(href='chart')
+                  span.glyphicon.glyphicon-stats
+                  |  Charts
+      .col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main
+         .row
+            ol.breadcrumb
+               li
+                  a(href='#')
+                     span.glyphicon.glyphicon-home
+               li.active Charts
+         .row
+            .col-lg-12
+               h1.page-header Charts
+         .row
+            .col-lg-12
+               .panel.panel-default
+                  .panel-heading Line Chart
+                  .panel-body
+                     .canvas-wrapper
+                        canvas#line-chart.main-chart(height='200', width='600')
+         .row
+            .col-lg-12
+               .panel.panel-default
+                  .panel-heading Bar Chart
+                  .panel-body
+                     .canvas-wrapper
+                        canvas#bar-chart.main-chart(height='200', width='600')
+         .row
+            .col-md-6
+               .panel.panel-default
+                  .panel-heading Pie Chart
+                  .panel-body
+                     .canvas-wrapper
+                        canvas#pie-chart.chart
+            .col-md-6
+               .panel.panel-default
+                  .panel-heading Doughnut Chart
+                  .panel-body
+                     .canvas-wrapper
+                        canvas#doughnut-chart.chart
+         .row
+            .col-xs-6.col-md-3
+               .panel.panel-default
+                  .panel-body.easypiechart-panel
+                     h4 Label:
+                     #easypiechart-blue.easypiechart(data-percent='92')
+                        span.percent 92%
+            .col-xs-6.col-md-3
+               .panel.panel-default
+                  .panel-body.easypiechart-panel
+                     h4 Label:
+                     #easypiechart-orange.easypiechart(data-percent='65')
+                        span.percent 65%
+            .col-xs-6.col-md-3
+               .panel.panel-default
+                  .panel-body.easypiechart-panel
+                     h4 Label:
+                     #easypiechart-teal.easypiechart(data-percent='56')
+                        span.percent 56%
+            .col-xs-6.col-md-3
+               .panel.panel-default
+                  .panel-body.easypiechart-panel
+                     h4 Label:
+                     #easypiechart-red.easypiechart(data-percent='27')
+                        span.percent 27%
+      script(src='/js/jquery-1.11.1.min.js')
+      script(src='/js/bootstrap.min.js')
+      script(src='/js/chart.min.js')
+      script(src='/js/chart-data.js')
+      script(src='/js/easypiechart.js')
+      script(src='/js/easypiechart-data.js')
+      script(src='/js/bootstrap-datepicker.js')
+      script.
+         !function ($) {
+            $(document).on("click","ul.nav li.parent > a > span.icon", function(){
+               $(this).find('em:first').toggleClass("glyphicon-minus");
+            });
+            $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+         }(window.jQuery);
+         $(window).on('resize', function () {
+            if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+         })
+         $(window).on('resize', function () {
+            if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+         })
