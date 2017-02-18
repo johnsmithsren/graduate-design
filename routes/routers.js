@@ -18,6 +18,7 @@ var ctrls = require('../controller/index');
 
 
 router.get('/',ctrls.login);
+router.get('/get_userInfo',ctrls.get_userInfo);
 router.get('/getcode',ctrls.qrcode.getcode);
 router.get('/select',ctrls.sql.sqlselect);
 router.post('/user/login/sign_up',ctrls.sql.userinsert);
@@ -26,4 +27,7 @@ router.get('/login',ctrls.log);
 router.get('/sign_up',ctrls.sign_up);
 router.get('/dashboard',ctrls.to_dashboard);
 router.get('/chart',ctrls.to_chart);
+router.get('/user_logout',ctrls.user_logout);
+
+router.post('/dashboard/logout',ctrls.dashboard.logout);
 module.exports = router;
