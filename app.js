@@ -28,6 +28,7 @@ app.use('/sign_up', index);
 app.use('/dashboard', index);
 app.use('/chart', index);
 app.use('/user_logout', index);
+app.use('/to_do_list',index);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

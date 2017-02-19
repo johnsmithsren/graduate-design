@@ -68,6 +68,10 @@ exports.to_dashboard = function(req, res) {
 exports.to_chart = function(req, res) {
     res.render('chart');
 };
+exports.to_do_task = function(req, res) {
+    res.render('to_do_list');
+};
+
 exports.user_logout = function(req, res) {
 
     //return Q.fcall(function() {

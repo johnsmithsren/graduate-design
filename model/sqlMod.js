@@ -57,6 +57,7 @@ sqlMod = (function() {
             sql='select pwd from account where name=?';
             return Q.nfcall(util.queryDatabase, sql, [options.name]);
         }).then(function(result) {
+            console.log(result);
             if(result.length){
                 var pass=result[0].pwd;
                 var follow_pass=options.pwd;
@@ -74,7 +75,7 @@ sqlMod = (function() {
                         {
                             return {mes:'ok'}
                         }
-                    },3600*24);
+                    },3600*4);
                     mem.set('pwd', result[0].pwd, function(err, result) {
                         if (err) {
                             return {err:0}

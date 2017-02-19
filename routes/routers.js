@@ -28,6 +28,6 @@ router.get('/sign_up',ctrls.sign_up);
 router.get('/dashboard',ctrls.to_dashboard);
 router.get('/chart',ctrls.to_chart);
 router.get('/user_logout',ctrls.user_logout);
-
+router.get('/to_do_list',ctrls.to_do_task);
 router.post('/dashboard/logout',ctrls.dashboard.logout);
 module.exports = router;
