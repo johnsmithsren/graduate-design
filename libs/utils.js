@@ -27,6 +27,7 @@ pool.on('enqueue', function() {
     return logger.info('no mysql connection is available');
 });
 exports.queryDatabase = function(sql, options, cb) {
+    logger.info(sql);
     Q.fcall(function() {
         return Q.nfcall(async.retry, 3, function(callback, result) {
             return pool.query(sql, options, callback);
