@@ -53,8 +53,8 @@ $('.test').click(function(){
         dataType : "json",
         success:function(data){
             if(data){
-                data3=data;
-                window.location.href=('http://www.demaciaspower.cn:3000/?'+JSON.stringify(data3.data[0]));
+                //data3=data;
+                //window.location.href=('http://www.demaciaspower.cn:3000/?'+JSON.stringify(data3.data[0]));
                 data3=data;
                 $(".test").text(JSON.stringify(data3.data[0]));
             } else{
