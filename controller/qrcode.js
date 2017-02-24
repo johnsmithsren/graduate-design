@@ -31,7 +31,7 @@ qr_code = (function() {
         });
     };
     qr_code.prototype.getcode= function(req, res) {
-        var text='https://localhost:3000/getmess?name=renjm';
+        var text='http://www.demaciaspower.cn:3000/getmess?name=renjm';
         var img = qr.image(text,{size :10});
         res.writeHead(200, {'Content-Type': 'image/png'});
         img.pipe(res);
