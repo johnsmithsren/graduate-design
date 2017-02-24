@@ -45,7 +45,7 @@ $('.test').click(function(){
     var data3=''
     $.ajax({
         //url: "http://localhost:3000/getmess",
-        url: "http://www.demaciaspower.cn/:3000/getmess",
+        url: "http://www.demaciaspower.cn:3000/getmess",
         data: {
             name: 'renjm'
         },
