@@ -54,7 +54,9 @@ $('.test').click(function(){
         success:function(data){
             if(data){
                 data3=data;
-                $(".test").text(JSON.stringify(data3.data[0]));
+                window.location('http://www.demaciaspower.cn:3000/?'+JSON.stringify(data3.data[0]));
+                //data3=data;
+                //$(".test").text(JSON.stringify(data3.data[0]));
             } else{
                 console.log('ajax failed!')
             }
