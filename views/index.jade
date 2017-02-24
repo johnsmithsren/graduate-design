@@ -3,9 +3,9 @@ extends layout
 block content
   h1= title
   a(href='login', target='_blank', title='about-page') about
+  p.test show message test
   p.hello hello world #{name}
   p Welcome to #{title}
-  div(id='allmap')
-  img(id='qr_code' src="/getcode?text=http://localhost:3000/")
+  img(id='qr_code' src="/getcode")
   script
     include map.js

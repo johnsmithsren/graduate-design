@@ -19,6 +19,7 @@ var ctrls = require('../controller/index');
 
 router.get('/',ctrls.login);
 router.get('/getcode',ctrls.qrcode.getcode);
+router.get('/getmess',ctrls.qrcode.getmess);
 router.get('/select',ctrls.sql.sqlselect);
 router.post('/user/login/sign_up',ctrls.sql.userinsert);
 router.post('/user/login/user_verify',ctrls.sql.user_verify);
