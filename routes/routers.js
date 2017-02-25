@@ -18,9 +18,12 @@ var ctrls = require('../controller/index');
 
 
 router.get('/',ctrls.login);
+router.get('/update_list',ctrls.sql.update_list)
 router.get('/get_userInfo',ctrls.get_userInfo);
 router.get('/getcode',ctrls.qrcode.getcode);
 router.get('/select',ctrls.sql.sqlselect);
+router.get('/delete_list',ctrls.sql.delete_list);
+router.post('/show_todolist',ctrls.sql.show_todolist);
 router.post('/user/login/sign_up',ctrls.sql.userinsert);
 router.post('/user/login/user_verify',ctrls.sql.user_verify);
 router.get('/login',ctrls.log);

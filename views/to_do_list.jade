@@ -54,94 +54,106 @@ html
                a(href='chart')
                   span.glyphicon.glyphicon-stats
                   |  Charts
+            li
+               a(href='to_do_list')
+                  span.glyphicon.glyphicon-list-alt
+                  |  List
             li.divider(role='presentation')
       .col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main
          .row
             ol.breadcrumb
                li
-                  a(href='#')
+                  a(href='dashboard')
                      span.glyphicon.glyphicon-home
                li.active Dashboard
-      .panel.panel-blue
-         .panel-heading.dark-overlay
-            span.glyphicon.glyphicon-check
-            | To-do List
-         .panel-body
-            ul.todo-list
-               li.todo-list-item
-                  .checkbox
-                     input#checkbox(type='checkbox')
-                     label(for='checkbox') Make a plan for today
-                  .pull-right.action-buttons
-                     a(href='#')
-                        span.glyphicon.glyphicon-pencil
-                     a.flag(href='#')
-                        span.glyphicon.glyphicon-flag
-                     a.trash(href='#')
-                        span.glyphicon.glyphicon-trash
-               li.todo-list-item
-                  .checkbox
-                     input#checkbox(type='checkbox')
-                     label(for='checkbox') Update Basecamp
-                  .pull-right.action-buttons
-                     a(href='#')
-                        span.glyphicon.glyphicon-pencil
-                     a.flag(href='#')
-                        span.glyphicon.glyphicon-flag
-                     a.trash(href='#')
-                        span.glyphicon.glyphicon-trash
-               li.todo-list-item
-                  .checkbox
-                     input#checkbox(type='checkbox')
-                     label(for='checkbox') Send email to Jane
-                  .pull-right.action-buttons
-                     a(href='#')
-                        span.glyphicon.glyphicon-pencil
-                     a.flag(href='#')
-                        span.glyphicon.glyphicon-flag
-                     a.trash(href='#')
-                        span.glyphicon.glyphicon-trash
-               li.todo-list-item
-                  .checkbox
-                     input#checkbox(type='checkbox')
-                     label(for='checkbox') Drink coffee
-                  .pull-right.action-buttons
-                     a(href='#')
-                        span.glyphicon.glyphicon-pencil
-                     a.flag(href='#')
-                        span.glyphicon.glyphicon-flag
-                     a.trash(href='#')
-                        span.glyphicon.glyphicon-trash
-               li.todo-list-item
-                  .checkbox
-                     input#checkbox(type='checkbox')
-                     label(for='checkbox') Do some work
-                  .pull-right.action-buttons
-                     a(href='#')
-                        span.glyphicon.glyphicon-pencil
-                     a.flag(href='#')
-                        span.glyphicon.glyphicon-flag
-                     a.trash(href='#')
-                        span.glyphicon.glyphicon-trash
-               li.todo-list-item
-                  .checkbox
-                     input#checkbox(type='checkbox')
-                     label(for='checkbox') Tidy up workspace
-                  .pull-right.action-buttons
-                     a(href='#')
-                        span.glyphicon.glyphicon-pencil
-                     a.flag(href='#')
-                        span.glyphicon.glyphicon-flag
-                     a.trash(href='#')
-                        span.glyphicon.glyphicon-trash
+         .row
+            .col-md-12
+               .panel.panel-blue
+                  .panel-heading.dark-overlay
+                     span.glyphicon.glyphicon-check
+                     | To-do List
+                  .panel-body
+                     ul.todo-list
+                        //li.todo-list-item
+                        //   .checkbox
+                        //      input#checkbox(type='checkbox')
+                        //      label(for='checkbox') Make a plan for today
+                        //   .pull-right.action-buttons
+                        //      a(href='#')
+                        //         span.glyphicon.glyphicon-pencil
+                        //      a.flag(href='#')
+                        //         span.glyphicon.glyphicon-flag
+                        //      a.trash(href='#')
+                        //         span.glyphicon.glyphicon-trash
+                        //li.todo-list-item
+                        //   .checkbox
+                        //      input#checkbox(type='checkbox')
+                        //      label(for='checkbox') Update Basecamp
+                        //   .pull-right.action-buttons
+                        //      a(href='#')
+                        //         span.glyphicon.glyphicon-pencil
+                        //      a.flag(href='#')
+                        //         span.glyphicon.glyphicon-flag
+                        //      a.trash(href='#')
+                        //         span.glyphicon.glyphicon-trash
+                        //li.todo-list-item
+                        //   .checkbox
+                        //      input#checkbox(type='checkbox')
+                        //      label(for='checkbox') Send email to Jane
+                        //   .pull-right.action-buttons
+                        //      a(href='#')
+                        //         span.glyphicon.glyphicon-pencil
+                        //      a.flag(href='#')
+                        //         span.glyphicon.glyphicon-flag
+                        //      a.trash(href='#')
+                        //         span.glyphicon.glyphicon-trash
+                        //li.todo-list-item
+                        //   .checkbox
+                        //      input#checkbox(type='checkbox')
+                        //      label(for='checkbox') Drink coffee
+                        //   .pull-right.action-buttons
+                        //      a(href='#')
+                        //         span.glyphicon.glyphicon-pencil
+                        //      a.flag(href='#')
+                        //         span.glyphicon.glyphicon-flag
+                        //      a.trash(href='#')
+                        //         span.glyphicon.glyphicon-trash
+                        //li.todo-list-item
+                        //   .checkbox
+                        //      input#checkbox(type='checkbox')
+                        //      label(for='checkbox') Do some work
+                        //   .pull-right.action-buttons
+                        //      a(href='#')
+                        //         span.glyphicon.glyphicon-pencil
+                        //      a.flag(href='#')
+                        //         span.glyphicon.glyphicon-flag
+                        //      a.trash(href='#')
+                        //         span.glyphicon.glyphicon-trash
+                        //li.todo-list-item
+                        //   .checkbox
+                        //      input#checkbox(type='checkbox')
+                        //      label(for='checkbox') Tidy up workspace
+                        //   .pull-right.action-buttons
+                        //      a(href='#')
+                        //         span.glyphicon.glyphicon-pencil
+                        //      a.flag(href='#')
+                        //         span.glyphicon.glyphicon-flag
+                        //      a.trash(href='#')
+                        //         span.glyphicon.glyphicon-trash
+                  .panel-footer
+                     .input-group
+                        input#btn-input.form-control.input-md(type='text', placeholder='Add new task')
+                        span.input-group-btn
+                           button#btn-todo.btn.btn-primary.btn-md Add
+      script(src='/js/jquery-1.11.1.min.js')
       script(src='/js/bootstrap.min.js')
       script(src='/js/chart.min.js')
       script(src='/js/chart-data.js')
       script(src='/js/easypiechart.js')
       script(src='/js/easypiechart-data.js')
       script(src='/js/bootstrap-datepicker.js')
-      script
-         include dash_board.js
+      script(src='/js/to_do_list.js')
+
       script.
          !function ($) {
             $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
