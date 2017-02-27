@@ -1,7 +1,6 @@
 /**
  * Created by renjm on 17/2/16.
  */
-<<<<<<< HEAD
 //var map = new BMap.Map("allmap")    // 创建Map实例
 //map.centerAndZoom(new BMap.Point(121.48, 31.22), 11); // 初始化地图,设置中心点坐标和地图级别
 //map.addControl(new BMap.MapTypeControl())  //添加地图类型控件
@@ -18,9 +17,6 @@
 //    //myDis.close();  //关闭鼠标测距大
 //});
 // 百度地图API功能
-
-=======
->>>>>>> 815f83be92569ac601ebd79d7d5eed9bf56c6ada
 $('.hello').click(function(){
     //alert('hi');
     var data3=''
@@ -42,8 +38,6 @@ $('.hello').click(function(){
     });
 
 });
-
-<<<<<<< HEAD
 $('.test').click(function(){
     //alert('helo world');
     var data3=''
@@ -67,7 +61,6 @@ $('.test').click(function(){
         }
     });
 
-=======
 
 
 
@@ -101,7 +94,6 @@ $('#gps_update').click(function() {
                 }
             }
         });
->>>>>>> 815f83be92569ac601ebd79d7d5eed9bf56c6ada
 });
 //var map = new BMap.Map("allmap");
 //map.centerAndZoom(new BMap.Point(121.48, 31.22), 11);
