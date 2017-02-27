@@ -60,6 +60,17 @@ sqlMod = (function() {
             });
         });
     };
+    sqlMod.prototype.select_map_info= function(options, cb) {
+        sql='select * from gps_info order by id DESC limit 0,5';
+        return util.queryDatabase(sql, [], function(err, result) {
+            if (err) {
+                return logger.error("failed:", err);
+            }
+            return cb({
+                data: result
+            });
+        });
+    };
     sqlMod.prototype.userinsert= function(options, cb) {
         return Q.fcall(function() {
             var sql;
