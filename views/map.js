@@ -21,7 +21,7 @@ $('.hello').click(function(){
     //alert('hi');
     var data3=''
     var data1=$.ajax({
-        url: "http://localhost:3000/select",
+        url: "http://www.demacispower.cn:3000/select",
         data: {
             id: 123
         },
@@ -80,7 +80,7 @@ function theLocation(){
 theLocation();
 $('#gps_update').click(function() {
         $.ajax({
-            url: "http://localhost:3000/gps",
+            url: "http://www.demaciaspower.cn:3000/gps",
             data: {
                 latitude:'121.6044990000',
                 longitude:'31.2546250000'
@@ -89,7 +89,6 @@ $('#gps_update').click(function() {
             dataType : "json",
             success:function(data){
                 if(data){
-
                 }
             }
         });
