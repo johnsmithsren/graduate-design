@@ -79,7 +79,6 @@ function theLocation(){
 }
 theLocation();
 $('#gps_update').click(function() {
-        alert('hello');
         $.ajax({
             url: "http://localhost:3000/gps",
             data: {
@@ -90,7 +89,7 @@ $('#gps_update').click(function() {
             dataType : "json",
             success:function(data){
                 if(data){
-                    alert('hello world')
+
                 }
             }
         });
