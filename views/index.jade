@@ -2,10 +2,19 @@ extends layout
 
 block content
   h1= title
+<<<<<<< HEAD
   a(href='login', target='_blank', title='about-page') about
   p.test show message test
   p.hello hello world #{name}
   p Welcome to #{title}
   img(id='qr_code' src="/getcode")
+=======
+  //a(href='login', target='_blank', title='about-page') about
+  //p.hello hello world #{name}
+  p Welcome to #{title}
+  div(id='allmap')
+  input(type="button" value="查询" id='gps_update')
+  //img(id='qr_code' src="/getcode?text=http://localhost:3000/")
+>>>>>>> 815f83be92569ac601ebd79d7d5eed9bf56c6ada
   script
     include map.js

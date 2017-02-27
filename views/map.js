@@ -1,6 +1,7 @@
 /**
  * Created by renjm on 17/2/16.
  */
+<<<<<<< HEAD
 //var map = new BMap.Map("allmap")    // 创建Map实例
 //map.centerAndZoom(new BMap.Point(121.48, 31.22), 11); // 初始化地图,设置中心点坐标和地图级别
 //map.addControl(new BMap.MapTypeControl())  //添加地图类型控件
@@ -18,6 +19,8 @@
 //});
 // 百度地图API功能
 
+=======
+>>>>>>> 815f83be92569ac601ebd79d7d5eed9bf56c6ada
 $('.hello').click(function(){
     //alert('hi');
     var data3=''
@@ -40,6 +43,7 @@ $('.hello').click(function(){
 
 });
 
+<<<<<<< HEAD
 $('.test').click(function(){
     //alert('helo world');
     var data3=''
@@ -63,6 +67,41 @@ $('.test').click(function(){
         }
     });
 
+=======
+
+
+
+
+var map = new BMap.Map("allmap");
+map.centerAndZoom(new BMap.Point(121.48,31.22),11);
+map.enableScrollWheelZoom(true);
+
+// 用经纬度设置地图中心点
+function theLocation(){
+        map.clearOverlays();
+        var new_point = new BMap.Point('121.6044990000','31.2546250000');
+        var marker = new BMap.Marker(new_point);  // 创建标注
+        map.addOverlay(marker);              // 将标注添加到地图中
+        map.panTo(new_point);
+}
+theLocation();
+$('#gps_update').click(function() {
+        alert('hello');
+        $.ajax({
+            url: "http://localhost:3000/gps",
+            data: {
+                latitude:'121.6044990000',
+                longitude:'31.2546250000'
+            },
+            type: "GET",
+            dataType : "json",
+            success:function(data){
+                if(data){
+                    alert('hello world')
+                }
+            }
+        });
+>>>>>>> 815f83be92569ac601ebd79d7d5eed9bf56c6ada
 });
 //var map = new BMap.Map("allmap");
 //map.centerAndZoom(new BMap.Point(121.48, 31.22), 11);

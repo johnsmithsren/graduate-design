@@ -34,6 +34,28 @@ exports.login = function(req, res) {
         return logger.error("failed:", err);
     });
 };
+exports.get_userInfo = function(req, res) {
+    return Q.fcall(function() {
+        mem.get('user_name', function(err, val) {
+            if (err){
+                return err;
+            }
+            else {
+                //_name=val.toString();
+                if (val) {
+                    console.log('###asdasdas###');
+                    console.log(val.toString());
+                    res.send({title: 'jim black', name: val.toString()});
+                } else {
+                    res.send({title: 'jim black', name: 'hello anybody'});
+                }
+            }
+        });
+
+    }).fail(function(err) {
+        return logger.error("failed:", err);
+    });
+};
 exports.log = function(req, res) {
         res.render('login');
 };
@@ -45,6 +67,28 @@ exports.to_dashboard = function(req, res) {
 };
 exports.to_chart = function(req, res) {
     res.render('chart');
+};
+exports.to_do_task = function(req, res) {
+    res.render('to_do_list');
+};
+
+exports.user_logout = function(req, res) {
+
+    //return Q.fcall(function() {
+    //    mem.set('user_name','', function(err, result) {
+    //        if (err) {
+    //            return {err:0}
+    //        }
+    //        else
+    //        {
+    //            return {mes:'ok'}
+    //        }
+    //    },3600*24);
+    //
+    //}).fail(function(err) {
+    //    return logger.error("failed:", err);
+    //});
+    res.redirect('/');
 };
 //exports.select = function(req,res) {
 //    connection.connect();

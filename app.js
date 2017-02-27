@@ -26,8 +26,14 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/sign_up', index);
 app.use('/dashboard', index);
+<<<<<<< HEAD
 app.use('/charts', index);
 app.use('/getmess',index);
+=======
+app.use('/chart', index);
+app.use('/user_logout', index);
+app.use('/to_do_list',index);
+>>>>>>> 815f83be92569ac601ebd79d7d5eed9bf56c6ada
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

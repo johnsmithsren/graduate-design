@@ -6,7 +6,7 @@ html
    head
       meta(charset='utf-8')
       meta(name='viewport', content='width=device-width, initial-scale=1')
-      title Lumino - Dashboard
+      title Jim-Black
       link(href='/css/bootstrap.min.css', rel='stylesheet')
       link(href='/css/datepicker3.css', rel='stylesheet')
       link(href='/css/styles.css', rel='stylesheet')
@@ -20,13 +20,13 @@ html
                   span.icon-bar
                   span.icon-bar
                a.navbar-brand(href='#')
-                  span Lumino
-                  | Admin
+                  span Jim
+                  | Black
                ul.user-menu
                   li.dropdown.pull-right
                      a.dropdown-toggle(href='#', data-toggle='dropdown')
                         span.glyphicon.glyphicon-user
-                        |  User
+                        span(id="user_name")
                         span.caret
                      ul.dropdown-menu(role='menu')
                         li
@@ -38,7 +38,7 @@ html
                               span.glyphicon.glyphicon-cog
                               |  Settings
                         li
-                           a(href='#')
+                           a(id='user_logout')
                               span.glyphicon.glyphicon-log-out
                               |  Logout
       #sidebar-collapse.col-sm-3.col-lg-2.sidebar
@@ -54,6 +54,10 @@ html
                a(href='chart')
                   span.glyphicon.glyphicon-stats
                   |  Charts
+            li
+               a(href='to_do_list')
+                  span.glyphicon.glyphicon-list-alt
+                  |  List
             li.divider(role='presentation')
       .col-sm-9.col-sm-offset-3.col-lg-10.col-lg-offset-2.main
          .row
@@ -73,34 +77,34 @@ html
                .panel.panel-blue.panel-widget
                   .row.no-padding
                      .col-sm-3.col-lg-5.widget-left
-                        em.glyphicon.glyphicon-shopping-cart.glyphicon-l
+                        em.glyphicon.glyphicon-map-marker.glyphicon-l
                      .col-sm-9.col-lg-7.widget-right
                         .large 120
-                        .text-muted New Orders
+                        .text-muted Map
             .col-xs-12.col-md-6.col-lg-3
                .panel.panel-orange.panel-widget
                   .row.no-padding
                      .col-sm-3.col-lg-5.widget-left
-                        em.glyphicon.glyphicon-comment.glyphicon-l
+                        em.glyphicon.glyphicon-list-alt.glyphicon-l
                      .col-sm-9.col-lg-7.widget-right
                         .large 52
-                        .text-muted Comments
+                        .text-muted News
             .col-xs-12.col-md-6.col-lg-3
                .panel.panel-teal.panel-widget
                   .row.no-padding
                      .col-sm-3.col-lg-5.widget-left
-                        em.glyphicon.glyphicon-user.glyphicon-l
+                        em.glyphicon.glyphicon-tasks.glyphicon-l
                      .col-sm-9.col-lg-7.widget-right
                         .large 24
-                        .text-muted New Users
+                        .text-muted Task
             .col-xs-12.col-md-6.col-lg-3
                .panel.panel-red.panel-widget
                   .row.no-padding
                      .col-sm-3.col-lg-5.widget-left
-                        em.glyphicon.glyphicon-stats.glyphicon-l
+                        em.glyphicon.glyphicon-leaf.glyphicon-l
                      .col-sm-9.col-lg-7.widget-right
                         .large 25.2k
-                        .text-muted Visitors
+                        .text-muted Health
          // /.row
          .row
             .col-lg-12
@@ -110,31 +114,31 @@ html
                      .canvas-wrapper
                         canvas#line-chart.main-chart(height='200', width='600')
          // /.row
-         .row
-            .col-xs-6.col-md-3
-               .panel.panel-default
-                  .panel-body.easypiechart-panel
-                     h4 New Orders
-                     #easypiechart-blue.easypiechart(data-percent='92')
-                        span.percent 92%
-            .col-xs-6.col-md-3
-               .panel.panel-default
-                  .panel-body.easypiechart-panel
-                     h4 Comments
-                     #easypiechart-orange.easypiechart(data-percent='65')
-                        span.percent 65%
-            .col-xs-6.col-md-3
-               .panel.panel-default
-                  .panel-body.easypiechart-panel
-                     h4 New Users
-                     #easypiechart-teal.easypiechart(data-percent='56')
-                        span.percent 56%
-            .col-xs-6.col-md-3
-               .panel.panel-default
-                  .panel-body.easypiechart-panel
-                     h4 Visitors
-                     #easypiechart-red.easypiechart(data-percent='27')
-                        span.percent 27%
+         //.row
+         //   .col-xs-6.col-md-3
+         //      .panel.panel-default
+         //         .panel-body.easypiechart-panel
+         //            h4 New Orders
+         //            #easypiechart-blue.easypiechart(data-percent='92')
+         //               span.percent 92%
+         //   .col-xs-6.col-md-3
+         //      .panel.panel-default
+         //         .panel-body.easypiechart-panel
+         //            h4 Comments
+         //            #easypiechart-orange.easypiechart(data-percent='65')
+         //               span.percent 65%
+         //   .col-xs-6.col-md-3
+         //      .panel.panel-default
+         //         .panel-body.easypiechart-panel
+         //            h4 New Users
+         //            #easypiechart-teal.easypiechart(data-percent='56')
+         //               span.percent 56%
+         //   .col-xs-6.col-md-3
+         //      .panel.panel-default
+         //         .panel-body.easypiechart-panel
+         //            h4 Visitors
+         //            #easypiechart-red.easypiechart(data-percent='27')
+         //               span.percent 27%
          // /.row
          .row
             .col-md-8
@@ -261,6 +265,8 @@ html
       script(src='/js/easypiechart.js')
       script(src='/js/easypiechart-data.js')
       script(src='/js/bootstrap-datepicker.js')
+      script
+         include dash_board.js
       script.
          !function ($) {
             $(document).on("click","ul.nav li.parent > a > span.icon", function(){
