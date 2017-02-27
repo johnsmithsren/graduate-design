@@ -26,7 +26,8 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/sign_up', index);
 app.use('/dashboard', index);
-app.use('/chart', index);
+app.use('/charts', index);
+app.use('/getmess',index);
 app.use('/user_logout', index);
 app.use('/to_do_list',index);
 // catch 404 and forward to error handler

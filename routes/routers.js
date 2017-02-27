@@ -22,6 +22,7 @@ router.get('/gps',ctrls.sql.gpsmapshow);
 router.get('/update_list',ctrls.sql.update_list)
 router.get('/get_userInfo',ctrls.get_userInfo);
 router.get('/getcode',ctrls.qrcode.getcode);
+router.get('/getmess',ctrls.qrcode.getmess);
 router.get('/select',ctrls.sql.sqlselect);
 router.get('/delete_list',ctrls.sql.delete_list);
 router.post('/show_todolist',ctrls.sql.show_todolist);

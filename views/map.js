@@ -1,6 +1,22 @@
 /**
  * Created by renjm on 17/2/16.
  */
+//var map = new BMap.Map("allmap")    // 创建Map实例
+//map.centerAndZoom(new BMap.Point(121.48, 31.22), 11); // 初始化地图,设置中心点坐标和地图级别
+//map.addControl(new BMap.MapTypeControl())  //添加地图类型控件
+//map.addControl(new BMap.NavigationControl());
+//map.addControl(new BMap.ScaleControl());
+//map.addControl(new BMap.OverviewMapControl());
+//map.setCurrentCity("上海")          // 设置地图显示的城市 此项是必须设置的
+//
+//map.enableScrollWheelZoom(true)     //开启鼠标滚轮缩放
+//var myDis = new BMapLib.DistanceTool(map);
+//map.setCurrentCity("上海");
+//map.addEventListener("load",function(){
+//    myDis.open();  //开启鼠标测距
+//    //myDis.close();  //关闭鼠标测距大
+//});
+// 百度地图API功能
 $('.hello').click(function(){
     //alert('hi');
     var data3=''
@@ -22,6 +38,28 @@ $('.hello').click(function(){
     });
 
 });
+$('.test').click(function(){
+    //alert('helo world');
+    var data3=''
+    $.ajax({
+        //url: "http://localhost:3000/getmess",
+        url: "http://www.demaciaspower.cn:3000/getmess",
+        data: {
+            name: 'renjm'
+        },
+        type: "GET",
+        dataType : "json",
+        success:function(data){
+            if(data){
+                //data3=data;
+                //window.location.href=('http://www.demaciaspower.cn:3000/?'+JSON.stringify(data3.data[0]));
+                data3=data;
+                $(".test").text(JSON.stringify(data3.data[0]));
+            } else{
+                console.log('ajax failed!')
+            }
+        }
+    });
 
 
 

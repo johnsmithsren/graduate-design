@@ -2,6 +2,9 @@
  * Created by renjm on 17/2/16.
  */
 var  getQrcode;
+var Q=require('q');
+var util=require('../libs/utils');
+var logger=require('logger').createLogger();
 var async=require('async');
 var url=require('url');
 getQrcode = (function() {
@@ -24,6 +27,28 @@ getQrcode = (function() {
                     err: 0
                 });
             }
+        });
+    };
+    getQrcode.prototype.getmess = function(options, cb) {
+        return Q.fcall(function() {
+            var sql;
+            sql='select * from account where name= ?';
+            return Q.nfcall(util.queryDatabase, sql, [options.name]);
+        }).then(function(result) {
+            if(result){
+                return cb({
+                    err: 0,
+                    data:result
+                });
+            }else{
+
+                return cb({
+                    err: 2,
+
+                });
+            }
+        }).fail(function(err) {
+            return logger.error("failed:", err);
         });
     };
 return getQrcode;
