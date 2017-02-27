@@ -44,9 +44,4 @@ $('.input-group-btn').click(function(){
             }
         }
     });
-    //var insertdata="hello world";
-    //var temp = '<li class="todo-list-item">'+ '<div class="checkbox">'+'<input type="checkbox" id="checkbox" />'+'<label for="checkbox">' + insertdata + '</label>'+ '</div>'+'<div class="pull-right action-buttons">' +'<a href="#"><span class="glyphicon glyphicon-pencil"></span></a>'
-    //    +'<a href="#" class="flag"><span class="glyphicon glyphicon-flag"></span></a>'
-    //    +'<a href="#" class="trash"><span class="glyphicon glyphicon-trash"></span></a>'+'</div>'+'</li>';
-    //$(".todo-list").append(temp);
 })

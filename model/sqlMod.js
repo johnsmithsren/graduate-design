@@ -37,6 +37,18 @@ sqlMod = (function() {
             });
         });
     };
+    sqlMod.prototype.gpsmapshow= function(options, cb) {
+        sql='insert into gps_info set create_time=unix_timestamp(now()),update_time=unix_timestamp(now()),?';
+        var data=_.pick(options, 'longitude', 'latitude');
+        return util.queryDatabase(sql, [data], function(err, result) {
+            if (err) {
+                return logger.error("failed:", err);
+            }
+            return cb({
+                data: result
+            });
+        });
+    };
     sqlMod.prototype.show_todolist= function(options, cb) {
         sql='select * from day_task';
         return util.queryDatabase(sql, [], function(err, result) {

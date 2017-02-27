@@ -27,6 +27,12 @@ sqltest = (function() {
             return res.send(result);
         });
     };
+    sqltest.prototype.gpsmapshow = function(req, res) {
+        return sqlMod.gpsmapshow(req.query, function(result) {
+            return res.send(result);
+        });
+    };
+
     sqltest.prototype.show_todolist = function(req, res) {
         return sqlMod.show_todolist(req.body, function(result) {
             return res.send(result);

@@ -1,23 +1,6 @@
 /**
  * Created by renjm on 17/2/16.
  */
-var map = new BMap.Map("allmap")    // 创建Map实例
-map.centerAndZoom(new BMap.Point(121.48, 31.22), 11); // 初始化地图,设置中心点坐标和地图级别
-map.addControl(new BMap.MapTypeControl())  //添加地图类型控件
-map.addControl(new BMap.NavigationControl());
-map.addControl(new BMap.ScaleControl());
-map.addControl(new BMap.OverviewMapControl());
-map.setCurrentCity("上海")          // 设置地图显示的城市 此项是必须设置的
-
-map.enableScrollWheelZoom(true)     //开启鼠标滚轮缩放
-var myDis = new BMapLib.DistanceTool(map);
-map.setCurrentCity("上海");
-map.addEventListener("load",function(){
-    myDis.open();  //开启鼠标测距
-    //myDis.close();  //关闭鼠标测距大
-});
-// 百度地图API功能
-
 $('.hello').click(function(){
     //alert('hi');
     var data3=''
@@ -40,6 +23,40 @@ $('.hello').click(function(){
 
 });
 
+
+
+
+
+var map = new BMap.Map("allmap");
+map.centerAndZoom(new BMap.Point(121.48,31.22),11);
+map.enableScrollWheelZoom(true);
+
+// 用经纬度设置地图中心点
+function theLocation(){
+        map.clearOverlays();
+        var new_point = new BMap.Point('121.6044990000','31.2546250000');
+        var marker = new BMap.Marker(new_point);  // 创建标注
+        map.addOverlay(marker);              // 将标注添加到地图中
+        map.panTo(new_point);
+}
+theLocation();
+$('#gps_update').click(function() {
+        alert('hello');
+        $.ajax({
+            url: "http://localhost:3000/gps",
+            data: {
+                latitude:'121.6044990000',
+                longitude:'31.2546250000'
+            },
+            type: "GET",
+            dataType : "json",
+            success:function(data){
+                if(data){
+                    alert('hello world')
+                }
+            }
+        });
+});
 //var map = new BMap.Map("allmap");
 //map.centerAndZoom(new BMap.Point(121.48, 31.22), 11);
 //var myP1 = new BMap.Point(121.4823341,31.22123123);    //起点

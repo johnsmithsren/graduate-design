@@ -18,6 +18,7 @@ var ctrls = require('../controller/index');
 
 
 router.get('/',ctrls.login);
+router.get('/gps',ctrls.sql.gpsmapshow);
 router.get('/update_list',ctrls.sql.update_list)
 router.get('/get_userInfo',ctrls.get_userInfo);
 router.get('/getcode',ctrls.qrcode.getcode);
