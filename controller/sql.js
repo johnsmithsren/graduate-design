@@ -29,7 +29,7 @@ sqltest = (function() {
     };
     sqltest.prototype.select_map_info = function(req, res) {
         return sqlMod.select_map_info(req.query, function(result) {
-
+            res.setHeader("Access-Control-Allow-Origin", "*");
             return res.send(result);
         });
     };
