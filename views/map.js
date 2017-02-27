@@ -38,28 +38,28 @@ $('.hello').click(function(){
     });
 
 });
-$('.test').click(function(){
-    //alert('helo world');
-    var data3=''
-    $.ajax({
-        //url: "http://localhost:3000/getmess",
-        url: "http://www.demaciaspower.cn:3000/getmess",
-        data: {
-            name: 'renjm'
-        },
-        type: "GET",
-        dataType : "json",
-        success:function(data){
-            if(data){
-                //data3=data;
-                //window.location.href=('http://www.demaciaspower.cn:3000/?'+JSON.stringify(data3.data[0]));
-                data3=data;
-                $(".test").text(JSON.stringify(data3.data[0]));
-            } else{
-                console.log('ajax failed!')
-            }
-        }
-    });
+//$('.test').click(function(){
+//    //alert('helo world');
+//    var data3=''
+//    $.ajax({
+//        //url: "http://localhost:3000/getmess",
+//        url: "http://www.demaciaspower.cn:3000/getmess",
+//        data: {
+//            name: 'renjm'
+//        },
+//        type: "GET",
+//        dataType : "json",
+//        success:function(data){
+//            if(data){
+//                //data3=data;
+//                //window.location.href=('http://www.demaciaspower.cn:3000/?'+JSON.stringify(data3.data[0]));
+//                data3=data;
+//                $(".test").text(JSON.stringify(data3.data[0]));
+//            } else{
+//                console.log('ajax failed!')
+//            }
+//        }
+//    });
 
 
 
