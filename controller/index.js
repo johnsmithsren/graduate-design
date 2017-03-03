@@ -23,9 +23,9 @@ exports.login = function(req, res) {
             else {
                 //_name=val.toString();
                 if (val) {
-                    res.render('index', {title: 'jim black', name: val.toString()});
+                    res.render('index', {name: val.toString()});
                 } else {
-                    res.render('index', {title: 'jim black', name: 'hello anybody'});
+                    res.render('index', {name: 'hello anybody'});
                 }
             }
         });

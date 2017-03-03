@@ -135,43 +135,96 @@ sqlMod = (function() {
             return Q.nfcall(util.queryDatabase, sql, [options.name]);
         }).then(function(result) {
             console.log(result);
-            if(result.length){
-                var pass=result[0].pwd;
-                var follow_pass=options.pwd;
-                if (pass != follow_pass)
-                    return cb({
-                        err: "password or name wrong"
-                    });
-                else
-                {
-                    mem.set('user_name', options.name, function(err, result) {
-                        if (err) {
-                            return {err:0}
-                        }
-                        else
-                        {
-                            return {mes:'ok'}
-                        }
-                    },3600*4);
-                    mem.set('pwd', result[0].pwd, function(err, result) {
-                        if (err) {
-                            return {err:0}
-                        }
-                        else
-                        {
-                            return {mes:'ok'}
-                        }
-                    },3600*24);
-                    return cb({
-                        data: "welcome"
-                    });
+            mem.get('code', function(err, val) {
+                if (err){
+                    return err;
                 }
-            }
-            else{
-                return cb({
-                    err: "password or name wrong"
-                });
-            }
+                else {
+                    //_name=val.toString();
+                    if (val==options.code) {
+                        if(result.length){
+                            var pass=result[0].pwd;
+                            var follow_pass=options.pwd;
+                            if (pass != follow_pass)
+                                return cb({
+                                    err: "password or name wrong"
+                                });
+
+                            else
+                            {
+                                mem.set('user_name', options.name, function(err, result) {
+                                    if (err) {
+                                        return {err:0}
+                                    }
+                                    else
+                                    {
+                                        return {mes:'ok'}
+                                    }
+                                },3600*4);
+                                mem.set('pwd', result[0].pwd, function(err, result) {
+                                    if (err) {
+                                        return {err:0}
+                                    }
+                                    else
+                                    {
+                                        return {mes:'ok'}
+                                    }
+                                },3600*24);
+                                return cb({
+                                    data: "welcome"
+                                });
+                            }
+                        }
+                        else{
+                            return cb({
+                                err: "password or name wrong"
+                            });
+                        }
+                    } else {
+                        return cb({
+                            err: "code wrong"
+                        });
+                    }
+                }
+            });
+            //if(result.length){
+            //    var pass=result[0].pwd;
+            //    var follow_pass=options.pwd;
+            //    if (pass != follow_pass)
+            //        return cb({
+            //            err: "password or name wrong"
+            //        });
+            //
+            //    else
+            //    {
+            //        mem.set('user_name', options.name, function(err, result) {
+            //            if (err) {
+            //                return {err:0}
+            //            }
+            //            else
+            //            {
+            //                return {mes:'ok'}
+            //            }
+            //        },3600*4);
+            //        mem.set('pwd', result[0].pwd, function(err, result) {
+            //            if (err) {
+            //                return {err:0}
+            //            }
+            //            else
+            //            {
+            //                return {mes:'ok'}
+            //            }
+            //        },3600*24);
+            //        return cb({
+            //            data: "welcome"
+            //        });
+            //    }
+            //}
+            //else{
+            //    return cb({
+            //        err: "password or name wrong"
+            //    });
+            //}
         }).fail(function(err) {
             return cb({
                 err: "inner failed"
