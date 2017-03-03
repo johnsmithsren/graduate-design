@@ -47,11 +47,13 @@ sqltest = (function() {
 
     sqltest.prototype.userinsert = function(req, res) {
         return sqlMod.userinsert(req.body, function(result) {
+            res.setHeader("Access-Control-Allow-Origin", "*");
             return res.send(result);
         });
     };
     sqltest.prototype.user_verify = function(req, res) {
         return sqlMod.user_verify(req.body, function(result) {
+            res.setHeader("Access-Control-Allow-Origin", "*");
             return res.send(result);
         });
     };

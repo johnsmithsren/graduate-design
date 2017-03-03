@@ -2,6 +2,7 @@
  * Created by renjm on 17/2/18.
  */
 var util=require('../libs/utils');
+var async=require('async');
 var logger=require('logger').createLogger();
 var memcached = require('memjs');
 var mem = memcached.Client.create('localhost'+ ':' + '11211');
@@ -12,7 +13,7 @@ dash_board = (function() {
     dash_board.prototype.logout = function(options, cb) {
         return async.waterfall([
             function(callback) {
-                mem.set('user_name', options.name, function(err, result) {
+                mem.set('user_name', '', function(err, result) {
                     if (err) {
                         return {err:0}
                     }

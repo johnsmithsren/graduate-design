@@ -23,6 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+///user/login/sign_up
 app.use('/users', users);
 app.use('/sign_up', index);
 app.use('/dashboard', index);

@@ -30,12 +30,13 @@ exports.queryDatabase = function(sql, options, cb) {
     logger.info(sql);
     Q.fcall(function() {
         return Q.nfcall(async.retry, 3, function(callback, result) {
+            //logger.info(callback);
             return pool.query(sql, options, callback);
         });
     }).then(function(result) {
         return cb(null, result[0]);
     }).fail(cb);
-    return logger.info('hello','world');
+    return logger.info(cb);
 };
 exports.setmemcached = function(key, value, cb) {
     return client.set(key, value, function(err, result) {

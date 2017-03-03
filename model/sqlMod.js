@@ -74,14 +74,15 @@ sqlMod = (function() {
     sqlMod.prototype.userinsert= function(options, cb) {
         return Q.fcall(function() {
             var sql;
-            sql='select * from account where account=?';
+            sql='select * from account where account= ?';
             return Q.nfcall(util.queryDatabase, sql, [options.account]);
         }).then(function(result) {
-            if(result){
+            if(result.length){
                 return cb({
                     err: '这个账号已经存在'
                 });
             }else{
+
                 var sql ='insert into account set create_time=unix_timestamp(now()),update_time=unix_timestamp(now()),last_logintime=unix_timestamp(now()),?';
                 var _data = _.pick(options, 'pwd', 'name', 'tel', 'account');
                 return util.queryDatabase(sql, [_data], function(err, result) {
@@ -93,9 +94,9 @@ sqlMod = (function() {
                     });
                 });
             }
-
         }).fail(function(err) {
-            return logger.error("failed:", err);
+
+            return logger.error("failed:",err);
         });
 
     };
