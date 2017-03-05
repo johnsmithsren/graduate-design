@@ -57,6 +57,18 @@ sqltest = (function() {
             return res.send(result);
         });
     };
+    sqltest.prototype.getnews = function(req, res) {
+        return sqlMod.getnews(req.body, function(result) {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            return res.send(result);
+        });
+    };
+    sqltest.prototype.send_new_message = function(req, res) {
+        return sqlMod.send_new_message(req.query, function(result) {
+            res.setHeader("Access-Control-Allow-Origin", "*");
+            return res.send(result);
+        });
+    };
     return sqltest;
 })();
 module.exports = sqltest;

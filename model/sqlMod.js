@@ -233,6 +233,51 @@ sqlMod = (function() {
         });
 
     };
+
+
+    sqlMod.prototype.getnews= function(options, cb) {
+        return Q.fcall(function() {
+            var temp=options.data;
+            var sql;
+            if(temp==1){
+                sql='select * from news order';
+            }else{
+                sql='select * from news order by update_time DESC LIMIT 0,5';
+            }
+
+            return Q.nfcall(util.queryDatabase, sql, [options.account]);
+        }).then(function(result) {
+            return cb({
+                data: result
+            });
+
+        }).fail(function(err) {
+            return logger.error("failed:", err);
+        });
+
+    };
+    sqlMod.prototype.send_new_message= function(options, cb) {
+        console.log('1231312awewqe',options);
+        return Q.fcall(function() {
+            var _title=options.title;
+            var _news=options.content;
+            var sql;
+            var _data={
+                title:_title,
+                news:[_news],
+            };
+            sql='insert into news set create_time=unix_timestamp(now()),update_time=unix_timestamp(now()),? ';
+            return Q.nfcall(util.queryDatabase, sql, [_data]);
+        }).then(function(result) {
+            return cb({
+                data: result
+            });
+
+        }).fail(function(err) {
+            return logger.error("failed:", err);
+        });
+
+    };
     return sqlMod;
 
 })();

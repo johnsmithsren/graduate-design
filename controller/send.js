@@ -63,7 +63,22 @@ send_code = (function() {
                 return logger.error("failed:", err);
             });
     };
-
+    send_code.prototype.getnews= function(req, res) {
+        //superagent.get('http://bbs.runbible.cn/forum-2-1.html').end(function (err, sres) {
+        //    var $ = cheerio.load(sres.text);
+        //    $('td.start').each(function (index, item) {
+        //        var it = $(item);
+        //        //console.log(it[0]['attribs']["data-award"])
+        //        array.push({"data": it[0]['attribs']['data-period']});
+        //        array.push({'number': it[0]['attribs']["data-award"]});
+        //        if (i == 5) {
+        //            array.push('-');
+        //            i = 0;
+        //        }
+        //
+        //    });
+        //});
+    }
     return send_code;
 
 })();
