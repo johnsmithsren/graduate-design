@@ -38,7 +38,7 @@ sqlMod = (function() {
         });
     };
     sqlMod.prototype.gpsmapshow= function(options, cb) {
-        sql='insert into gps_info set create_time=unix_timestamp(now()),update_time=unix_timestamp(now()),?';
+        var sql='insert into gps_info set create_time=unix_timestamp(now()),update_time=unix_timestamp(now()),?';
         var data=_.pick(options, 'longitude', 'latitude');
         return util.queryDatabase(sql, [data], function(err, result) {
             if (err) {
@@ -140,9 +140,9 @@ sqlMod = (function() {
                     return err;
                 }
                 else {
-                    console.log('asdfadf',val);
+                    console.log('code',val.toString(),'code2',options.code);
                     //_name=val.toString();
-                    if (val==options.code) {
+                    if (val.toString()==options.code) {
                         if(result.length){
                             var pass=result[0].pwd;
                             var follow_pass=options.pwd;
