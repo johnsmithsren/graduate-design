@@ -140,6 +140,7 @@ sqlMod = (function() {
                     return err;
                 }
                 else {
+                    console.log('asdfadf',val);
                     //_name=val.toString();
                     if (val==options.code) {
                         if(result.length){
