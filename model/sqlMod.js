@@ -152,24 +152,24 @@ sqlMod = (function() {
 
                             else
                             {
-                                mem.set('user_name', options.name, function(err, result) {
-                                    if (err) {
-                                        return {err:0}
-                                    }
-                                    else
-                                    {
-                                        return {mes:'ok'}
-                                    }
-                                },3600*4);
-                                mem.set('pwd', result[0].pwd, function(err, result) {
-                                    if (err) {
-                                        return {err:0}
-                                    }
-                                    else
-                                    {
-                                        return {mes:'ok'}
-                                    }
-                                },3600*24);
+                                //mem.set('user_name', options.name, function(err, result) {
+                                //    if (err) {
+                                //        return {err:0}
+                                //    }
+                                //    else
+                                //    {
+                                //        return {mes:'ok'}
+                                //    }
+                                //},3600*4);
+                                //mem.set('pwd', result[0].pwd, function(err, result) {
+                                //    if (err) {
+                                //        return {err:0}
+                                //    }
+                                //    else
+                                //    {
+                                //        return {mes:'ok'}
+                                //    }
+                                //},3600*24);
                                 return cb({
                                     data: "welcome"
                                 });
