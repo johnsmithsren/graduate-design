@@ -17,7 +17,8 @@ server.on('message', function(msg, rinfo){
     var data={
         longitude:temp_data[0],
         latitude:temp_data[2],
-        step_number:temp_data[4]
+        step_number:temp_data[4],
+        deviceId:temp_data[6]
     };
     return util.queryDatabase(sql, [data], function(err, result) {
         if (err) {
