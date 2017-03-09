@@ -108,7 +108,7 @@ sqlMod = (function() {
                 });
             }else{
                 var sql ='insert into account set create_time=unix_timestamp(now()),status=1,update_time=unix_timestamp(now()),last_logintime=unix_timestamp(now()),?';
-                var _data = _.pick(options, 'pwd', 'name', 'tel', 'account');
+                var _data = _.pick(options, 'pwd', 'name', 'tel', 'account','shoe_code','weight');
                 return util.queryDatabase(sql, [_data], function(err, result) {
                     if (err) {
                         return logger.error("failed:", err);
