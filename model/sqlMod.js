@@ -49,6 +49,18 @@ sqlMod = (function() {
             });
         });
     };
+    sqlMod.prototype.get_stepdata= function(options, cb) {
+        var sql='';
+        var data=_.pick(options, 'longitude', 'latitude');
+        return util.queryDatabase(sql, [data], function(err, result) {
+            if (err) {
+                return logger.error("failed:", err);
+            }
+            return cb({
+                data: result
+            });
+        });
+    };
     sqlMod.prototype.show_todolist= function(options, cb) {
         sql='select * from day_task';
         return util.queryDatabase(sql, [], function(err, result) {
