@@ -9,8 +9,8 @@ dashboard = (function() {
         this.options = options;
     }
     dashboard.prototype.logout= function(req, res) {
+        console.log(req,req.body,req.query)
         return dashboardMod.logout(req.body, function(result) {
-            res.setHeader("Access-Control-Allow-Origin", "*");
             return res.send(result);
         });
     };
