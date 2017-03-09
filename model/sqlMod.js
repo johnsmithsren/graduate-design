@@ -74,7 +74,7 @@ sqlMod = (function() {
     };
     sqlMod.prototype.select_map_info= function(options, cb) {
         console.log(options)
-        sql='select a.*,b.weight from gps_info a left join account b on a.shoe_code=b.shoe_code and b.status=1 where a.shoe_code=? order by id DESC limit 0,5';
+        sql='select a.*,b.weight from gps_info a left join account b on a.shoe_code=b.shoe_code where a.shoe_code=? and b.status=1 order by id DESC limit 0,5';
         return util.queryDatabase(sql, [options.shoe_code], function(err, result) {
             if (err) {
                 return logger.error("failed:", err);
