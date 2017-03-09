@@ -11,30 +11,14 @@ dash_board = (function() {
         this.options = options;
     }
     dash_board.prototype.logout = function(options, cb) {
-        return async.waterfall([
-            function(callback) {
-                mem.set('user_name', '', function(err, result) {
-                    if (err) {
-                        return {err:0}
-                    }
-                    else
-                    {
-                        return {mes:'ok'}
-                    }
-                },3600*24);
-            }
-        ], function(err, result) {
+        sql='update account set status=0,update_time=unix_timestamp(now()),last_logintime=unix_timestamp(now())';
+        return util.queryDatabase(sql, [], function(err, result) {
             if (err) {
-                logger.error("fail:", err);
-                return cb({
-                    err: 1,
-                    msg: err.notice || 'fail'
-                });
-            } else {
-                return cb({
-                    err: 0
-                });
+                return logger.error("failed:", err);
             }
+            return cb({
+                msg:'success'
+            });
         });
     };
     return dash_board;

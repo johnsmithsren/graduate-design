@@ -74,7 +74,7 @@ sqlMod = (function() {
     };
     sqlMod.prototype.select_map_info= function(options, cb) {
         console.log(options)
-        sql='select * from gps_info where shoe_code=? order by id DESC limit 0,5';
+        sql='select a.*,b.weight from gps_info a left join account b on a.shoe_code=b.shoe_code and b.status=1 where shoe_code=? order by id DESC limit 0,5';
         return util.queryDatabase(sql, [options.shoe_code], function(err, result) {
             if (err) {
                 return logger.error("failed:", err);
@@ -86,7 +86,7 @@ sqlMod = (function() {
     };
     sqlMod.prototype.get_userInfo= function(options, cb) {
         console.log(options)
-        sql='select * from account where account=?';
+        sql='select * from account where account=? and status=1';
         return util.queryDatabase(sql, [options.name], function(err, result) {
             if (err) {
                 return logger.error("failed:", err);
@@ -107,8 +107,7 @@ sqlMod = (function() {
                     err: '这个账号已经存在'
                 });
             }else{
-
-                var sql ='insert into account set create_time=unix_timestamp(now()),update_time=unix_timestamp(now()),last_logintime=unix_timestamp(now()),?';
+                var sql ='insert into account set create_time=unix_timestamp(now()),status=1,update_time=unix_timestamp(now()),last_logintime=unix_timestamp(now()),?';
                 var _data = _.pick(options, 'pwd', 'name', 'tel', 'account');
                 return util.queryDatabase(sql, [_data], function(err, result) {
                     if (err) {
@@ -125,34 +124,34 @@ sqlMod = (function() {
         });
 
     };
-    sqlMod.prototype.delete_list= function(options, cb) {
-        return Q.fcall(function() {
-            var sql;
-            sql='select * from account where account=?';
-            return Q.nfcall(util.queryDatabase, sql, [options.account]);
-        }).then(function(result) {
-            if(result){
-                return cb({
-                    err: '这个账号已经存在'
-                });
-            }else{
-                var sql ='insert into account set create_time=unix_timestamp(now()),update_time=unix_timestamp(now()),last_logintime=unix_timestamp(now()),?';
-                var _data = _.pick(options, 'pwd', 'name', 'tel', 'account');
-                return util.queryDatabase(sql, [_data], function(err, result) {
-                    if (err) {
-                        return logger.error("failed:", err);
-                    }
-                    return cb({
-                        err: 0
-                    });
-                });
-            }
+    //sqlMod.prototype.delete_list= function(options, cb) {
+    //    return Q.fcall(function() {
+    //        var sql;
+    //        sql='select * from account where account=?';
+    //        return Q.nfcall(util.queryDatabase, sql, [options.account]);
+    //    }).then(function(result) {
+    //        if(result){
+    //            return cb({
+    //                err: '这个账号已经存在'
+    //            });
+    //        }else{
+    //            var sql ='insert into account set create_time=unix_timestamp(now()),update_time=unix_timestamp(now()),last_logintime=unix_timestamp(now()),?';
+    //            var _data = _.pick(options, 'pwd', 'name', 'tel', 'account');
+    //            return util.queryDatabase(sql, [_data], function(err, result) {
+    //                if (err) {
+    //                    return logger.error("failed:", err);
+    //                }
+    //                return cb({
+    //                    err: 0
+    //                });
+    //            });
+    //        }
+    //
+    //    }).fail(function(err) {
+    //        return logger.error("failed:", err);
+    //    });
 
-        }).fail(function(err) {
-            return logger.error("failed:", err);
-        });
-
-    };
+    //};
     sqlMod.prototype.user_verify= function(options, cb) {
         return Q.fcall(function() {
             var sql;
