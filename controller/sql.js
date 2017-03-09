@@ -62,7 +62,7 @@ sqltest = (function() {
         });
     };
     sqltest.prototype.get_userInfo = function(req, res) {
-        return sqlMod.get_userInfo(req.body, function(result) {
+        return sqlMod.get_userInfo(req.query, function(result) {
             return res.send(result);
         });
     };
