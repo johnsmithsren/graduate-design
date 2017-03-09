@@ -73,8 +73,19 @@ sqlMod = (function() {
         });
     };
     sqlMod.prototype.select_map_info= function(options, cb) {
-        sql='select * from gps_info order by id DESC limit 0,5';
+        sql='select * from gps_info where shoe_code=? order by id DESC limit 0,5';
         return util.queryDatabase(sql, [], function(err, result) {
+            if (err) {
+                return logger.error("failed:", err);
+            }
+            return cb({
+                data: result
+            });
+        });
+    };
+    sqlMod.prototype.get_userInfo= function(options, cb) {
+        sql='select * from account where account=?';
+        return util.queryDatabase(sql, [options.name], function(err, result) {
             if (err) {
                 return logger.error("failed:", err);
             }

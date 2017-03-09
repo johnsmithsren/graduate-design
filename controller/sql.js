@@ -61,6 +61,11 @@ sqltest = (function() {
             return res.send(result);
         });
     };
+    sqltest.prototype.get_userInfo = function(req, res) {
+        return sqlMod.get_userInfo(req.body, function(result) {
+            return res.send(result);
+        });
+    };
     sqltest.prototype.send_new_message = function(req, res) {
         return sqlMod.send_new_message(req.query, function(result) {
             return res.send(result);

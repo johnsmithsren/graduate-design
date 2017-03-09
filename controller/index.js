@@ -34,26 +34,22 @@ exports.login = function(req, res) {
         return logger.error("failed:", err);
     });
 };
-exports.get_userInfo = function(req, res) {
-    return Q.fcall(function() {
-        mem.get('user_name', function(err, val) {
-            if (err){
-                return err;
-            }
-            else {
-                //_name=val.toString();
-                if (val) {
-                    res.send({name: val.toString()});
-                } else {
-                    res.send({name: 'anybody'});
-                }
-            }
-        });
-
-    }).fail(function(err) {
-        return logger.error("failed:", err);
-    });
-};
+//exports.get_userInfo = function(req, res) {
+//    return Q.fcall(function() {
+//        sql='select * from account where account=?';
+//        return util.queryDatabase(sql, [], function(err, result) {
+//            if (err) {
+//                return logger.error("failed:", err);
+//            }
+//            return cb({
+//                data: result
+//            });
+//        });
+//
+//    }).fail(function(err) {
+//        return logger.error("failed:", err);
+//    });
+//};
 exports.log = function(req, res) {
         res.render('login');
 };
