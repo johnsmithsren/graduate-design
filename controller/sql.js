@@ -11,25 +11,21 @@ sqltest = (function() {
     }
     sqltest.prototype.sqlselect = function(req, res) {
         return sqlMod.sqlselect(req.query, function(result) {
-
             return res.send(result);
         });
     };
     sqltest.prototype.update_list = function(req, res) {
         return sqlMod.update_list(req.query, function(result) {
-
             return res.send(result);
         });
     };
     sqltest.prototype.delete_list = function(req, res) {
         return sqlMod.delete_list(req.query, function(result) {
-
             return res.send(result);
         });
     };
     sqltest.prototype.select_map_info = function(req, res) {
         return sqlMod.select_map_info(req.query, function(result) {
-            res.setHeader("Access-Control-Allow-Origin", "*");
             return res.send(result);
         });
     };
@@ -47,31 +43,26 @@ sqltest = (function() {
 
     sqltest.prototype.userinsert = function(req, res) {
         return sqlMod.userinsert(req.body, function(result) {
-            res.setHeader("Access-Control-Allow-Origin", "*");
             return res.send(result);
         });
     };
     sqltest.prototype.user_verify = function(req, res) {
         return sqlMod.user_verify(req.body, function(result) {
-            res.setHeader("Access-Control-Allow-Origin", "*");
             return res.send(result);
         });
     };
     sqltest.prototype.getnews = function(req, res) {
         return sqlMod.getnews(req.body, function(result) {
-            res.setHeader("Access-Control-Allow-Origin", "*");
             return res.send(result);
         });
     };
     sqltest.prototype.get_stepdata = function(req, res) {
         return sqlMod.get_stepdata(req.body, function(result) {
-            res.setHeader("Access-Control-Allow-Origin", "*");
             return res.send(result);
         });
     };
     sqltest.prototype.send_new_message = function(req, res) {
         return sqlMod.send_new_message(req.query, function(result) {
-            res.setHeader("Access-Control-Allow-Origin", "*");
             return res.send(result);
         });
     };
