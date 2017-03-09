@@ -26,8 +26,6 @@ sqlMod = (function() {
     sqlMod.prototype.update_list= function(options, cb) {
         sql='insert into day_task set create_time=unix_timestamp(now()),update_time=unix_timestamp(now()), ?';
         var data=_.pick(options, 'name', 'task');
-        console.log('!@#!@#@!#')
-        console.log(options);
         return util.queryDatabase(sql, [data], function(err, result) {
             if (err) {
                 return logger.error("failed:", err);
@@ -82,6 +80,38 @@ sqlMod = (function() {
             return cb({
                 data: result
             });
+        });
+    };
+    sqlMod.prototype.get_userprofile= function(options, cb) {
+        console.log(options);
+        var _data=[];
+        return Q.fcall(function () {
+            var sql;
+            sql = 'select * from account where account=?';
+            return Q.nfcall(util.queryDatabase, sql, [options.account]);
+        }).then(function (result) {
+            _data.push(result);
+            var sql2;
+            sql2 = 'select * from gps_info where shoe_code=?';
+            return Q.nfcall(util.queryDatabase, sql2, [result.shoe_code]);
+        }).then(function (result) {
+            _data.push(result);
+            return cb({
+                data: _data
+            });
+        }).fail(function (err) {
+            return logger.error("failed:", err);
+        });
+    };
+    sqlMod.prototype.update_userprofile= function(options, cb) {
+        return Q.fcall(function () {
+            var sql;
+            sql = 'update account set update_time=unix_timestamp(now()),? where account=?';
+            var _data = _.pick(options, 'pwd', 'name', 'tel', 'account','shoe_code','weight');
+            return Q.nfcall(util.queryDatabase, sql, [_data,options.account]);
+
+        }).fail(function (err) {
+            return logger.error("failed:", err);
         });
     };
     sqlMod.prototype.get_userInfo= function(options, cb) {
@@ -282,7 +312,6 @@ sqlMod = (function() {
 
     };
     sqlMod.prototype.send_new_message= function(options, cb) {
-        console.log('1231312awewqe',options);
         return Q.fcall(function() {
             var _title=options.title;
             var _news=options.content;

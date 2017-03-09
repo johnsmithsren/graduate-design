@@ -25,6 +25,8 @@ router.get('/update_list',ctrls.sql.update_list)
 router.get('/get_userInfo',ctrls.sql.get_userInfo);
 router.get('/getcode',ctrls.qrcode.getcode);
 router.get('/select_map_info',ctrls.sql.select_map_info);
+router.get('/get_userprofile',ctrls.sql.get_userprofile);
+router.post('update_userprofile',ctrls.sql.update_userprofile);
 router.post('/user/send_code',ctrls.send.send_code);
 router.get('/getmess',ctrls.qrcode.getmess);
 router.get('/select',ctrls.sql.sqlselect);
