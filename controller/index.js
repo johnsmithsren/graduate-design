@@ -43,11 +43,8 @@ exports.get_userInfo = function(req, res) {
             else {
                 //_name=val.toString();
                 if (val) {
-
-                    res.setHeader("Access-Control-Allow-Origin", "*");
                     res.send({name: val.toString()});
                 } else {
-                    res.setHeader("Access-Control-Allow-Origin", "*");
                     res.send({name: 'anybody'});
                 }
             }
