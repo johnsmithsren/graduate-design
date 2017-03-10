@@ -207,6 +207,9 @@ sqlMod = (function() {
 
                             else
                             {
+                                var _sql;
+                                _sql='update account set status=1 where name=?';
+                                return Q.nfcall(util.queryDatabase, _sql, [options.name]);
                                 //mem.set('user_name', options.name, function(err, result) {
                                 //    if (err) {
                                 //        return {err:0}
@@ -225,9 +228,6 @@ sqlMod = (function() {
                                 //        return {mes:'ok'}
                                 //    }
                                 //},3600*24);
-                                return cb({
-                                    data: "welcome"
-                                });
                             }
                         }
                         else{
@@ -280,6 +280,10 @@ sqlMod = (function() {
             //        err: "password or name wrong"
             //    });
             //}
+        }).then(function(result) {
+            return cb({
+                msg:'success'
+            });
         }).fail(function(err) {
             return cb({
                 err: "inner failed"
