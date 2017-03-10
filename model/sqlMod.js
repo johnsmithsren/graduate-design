@@ -336,6 +336,23 @@ sqlMod = (function() {
         });
 
     };
+    sqlMod.prototype.set_user_pass= function(options, cb) {
+        return Q.fcall(function() {
+            var pwd=options.pwd;
+            var account=options.account;
+            var sql;
+            sql='update account set update_time=unix_timestamp(now()),pwd=? where account=? ';
+            return Q.nfcall(util.queryDatabase, sql, [pwd,account]);
+        }).then(function(result) {
+            return cb({
+                data: result
+            });
+
+        }).fail(function(err) {
+            return logger.error("failed:", err);
+        });
+
+    };
     return sqlMod;
 
 })();

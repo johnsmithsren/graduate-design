@@ -71,6 +71,11 @@ sqltest = (function() {
             return res.send(result);
         });
     };
+    sqltest.prototype.set_user_pass = function(req, res) {
+        return sqlMod.set_user_pass(req.query, function(result) {
+            return res.send(result);
+        });
+    };
     sqltest.prototype.send_new_message = function(req, res) {
         return sqlMod.send_new_message(req.query, function(result) {
             return res.send(result);

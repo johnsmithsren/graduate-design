@@ -31,6 +31,7 @@ app.use('/charts', index);
 app.use('/getmess',index);
 app.use('/user_logout', index);
 app.use('/to_do_list',index);
+app.use('/reset',index);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

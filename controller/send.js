@@ -9,11 +9,19 @@ var qr=require('qr-image');
 var logger=require('logger').createLogger();
 var url=require('url');
 var Q=require('q');
+var nodemailer = require('nodemailer');
 var util=require('../libs/utils');
 var memcached = require('memjs');
 var mem = memcached.Client.create('localhost'+ ':' + '11211');
 var send_code;
-
+var transporter = nodemailer.createTransport({
+    host: "smtp.qq.com",
+    port: 465,
+    auth: {
+        user: "1149104294@qq.com", // 账号
+        pass: "rjm10201993" // 密码
+    }
+});
 //exports.send_code = function(req, res) {
 //    var codetwo=Math.round((Math.random() + 0.1) * 10000);
 //    var codeone=codetwo < 9999 ? codetwo : Math.round(codetwo / 10);
@@ -63,21 +71,29 @@ send_code = (function() {
                 return logger.error("failed:", err);
             });
     };
-    send_code.prototype.getnews= function(req, res) {
-        //superagent.get('http://bbs.runbible.cn/forum-2-1.html').end(function (err, sres) {
-        //    var $ = cheerio.load(sres.text);
-        //    $('td.start').each(function (index, item) {
-        //        var it = $(item);
-        //        //console.log(it[0]['attribs']["data-award"])
-        //        array.push({"data": it[0]['attribs']['data-period']});
-        //        array.push({'number': it[0]['attribs']["data-award"]});
-        //        if (i == 5) {
-        //            array.push('-');
-        //            i = 0;
-        //        }
-        //
-        //    });
-        //});
+    send_code.prototype.send_mail= function(req, res) {
+
+        var mailOptions = {
+            from: '1149104294@qq.com ', // sender address
+            to: '1149104294@qq.com', // list of receivers
+            subject: 'Hello', // Subject line
+            text: 'Hello world ✔', // plaintext body
+            html: '<style type="text/css">a, a:hover, a:visited{color:#1A71C0;text-decoration: underline;}</style>'+
+            '<table border="0"><tr><td style="font-size:14px;text-align: left;">您好请点击此地址重新设置密码 http://demaciaspower.cn/reset</td> </tr>'+
+            '<tr><td style="font-size:12px;text-align: left;"><tr>'+
+            '</tr><tr>'+
+            '<td style="font-size:14px;text-align: left;">此邮件为自动发送，请勿回复！</td></tr></table>'
+        };
+        res.setHeader('Access-Control-Allow-Origin','*');
+        transporter.sendMail(mailOptions, function(error, info){
+            if(error){
+                console.log(error);
+            }else{
+                console.log('Message sent: ' + info.response);
+                res.send('success');
+            }
+        });
+
     }
     return send_code;
 
