@@ -65,6 +65,9 @@ exports.to_chart = function(req, res) {
 exports.to_do_task = function(req, res) {
     res.render('to_do_list');
 };
+exports.reset_pass = function(req, res) {
+    res.render('reset_pass');
+};
 
 exports.user_logout = function(req, res) {
 
