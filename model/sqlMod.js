@@ -339,20 +339,20 @@ sqlMod = (function() {
     };
     sqlMod.prototype.set_user_pass= function(options, cb) {
         return Q.fcall(function() {
-        //    var account=options.account;
-        //    if (account){
-        //        var _sql='select * from account where account=?'
-        //        return Q.nfcall(util.queryDatabase, _sql, [account]);
-        //    }
-        //    return cb({
-        //        err:'Email ERROR'
-        //    });
-        //}).then(function(result) {
-            var pwd=options.pwd;
             var account=options.account;
-            var sql;
-            sql='update account set update_time=unix_timestamp(now()),pwd=? where account=? ';
-            return Q.nfcall(util.queryDatabase, sql, [pwd,account]);
+            var _sql='select * from account where account=?'
+            return Q.nfcall(util.queryDatabase, _sql, [account]);
+        }).then(function(result) {
+            if (result.length){
+                var pwd=options.pwd;
+                var account=options.account;
+                var sql;
+                sql='update account set update_time=unix_timestamp(now()),pwd=? where account=? ';
+                return Q.nfcall(util.queryDatabase, sql, [pwd,account]);
+            }
+            else{
+                return;
+            }
         }).then(function(result) {
             return cb({
                 data: result

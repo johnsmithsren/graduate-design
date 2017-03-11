@@ -13,30 +13,21 @@ html
             .col-xs-10.col-xs-offset-1.col-sm-8.col-sm-offset-2.col-md-4.col-md-offset-4
                 .login-panel.panel.panel-default
                     .panel-heading 修改密码
-                    |
                     .panel-body
                         form(role="form")
                             fieldset
                                 .form-group
-                                    input#password.form-control(id='reset'  placeholder="Password", name="password", type="text", value="")
-
-
-                                a#forget.btn.btn-primary(href="forget_pass.html") 修改
+                                    input#password.form-control(placeholder="Password", name="password", type="text", value="")
+                                a#reset.btn.btn-primary 修改
             // /.col
         // /.row
         script(src="js/jquery-1.11.1.min.js")
-        |
         script(src="js/bootstrap.min.js")
-        |
         script(src="js/chart.min.js")
-        |
-        script(src="js/chart-data.js")
-        |
+        //script(src="js/chart-data.js")
         script(src="js/easypiechart.js")
-        |
         script(src="js/easypiechart-data.js")
-        |
-        script(src="js/login.js")
+        //script(src="js/login.js")
         // <script src="/try/bootstrap/twitter-bootstrap-v2/docs/assets/js/bootstrap-alert.js"></script>
         //
           作者：renjm@jiagouyun.com
@@ -59,19 +50,25 @@ html
 
             $('#reset').on('click', function (c) {
                 var password = $('#password').val();
-                var username = window.location.search;
+                var username = window.location.search.substring(1);
                 console.log(username);
+                if (username){
+                    $.ajax({
+                        url: "http://demaciaspower.cn/reset_user_pass",
+                        data: {
+                            account: username,
+                            pwd: password
+                        },
+                        type: "GET",
+                        dataType: "json",
+                        success: function (data) {
+                            if (data) {
+                            }
+                        }
+                    });
+                }
+                else{
+                    $('body').append('<div class="alert"><a class="close" data-dismiss="alert">×</a><strong>Warning!</strong>' + 'wrong email</div>')
+                }
             });
-//                $.ajax({
-//                    url: "http://www.demaciaspower.cn/reset_user_pass",
-//                    data: {
-//                        account:username,
-//                        pwd:password
-//                    },
-//                    type: "GET",
-//                    dataType : "json",
-//                    success:function(data){
-//                        if(data){
-//                        }
-//                    }
 
