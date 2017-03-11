@@ -26,7 +26,7 @@ router.get('/get_userInfo',ctrls.sql.get_userInfo);
 router.get('/getcode',ctrls.qrcode.getcode);
 router.get('/select_map_info',ctrls.sql.select_map_info);
 router.get('/get_userprofile',ctrls.sql.get_userprofile);
-router.post('update_userprofile',ctrls.sql.update_userprofile);
+router.post('/update_userprofile',ctrls.sql.update_userprofile);
 router.post('/user/send_code',ctrls.send.send_code);
 router.get('/getmess',ctrls.qrcode.getmess);
 router.get('/select',ctrls.sql.sqlselect);
@@ -37,10 +37,7 @@ router.post('/user/login/user_verify',ctrls.sql.user_verify);
 router.post('/user/find_pass',ctrls.send.send_mail);
 router.get('/login',ctrls.log);
 router.get('/reset',ctrls.reset_pass);
-
 router.get('/reset_user_pass',ctrls.sql.set_user_pass);
-
-
 router.get('/sign_up',ctrls.sign_up);
 router.get('/dashboard',ctrls.to_dashboard);
 router.get('/chart',ctrls.to_chart);
