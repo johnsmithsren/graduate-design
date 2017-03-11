@@ -183,20 +183,22 @@ sqlMod = (function() {
 
     //};
     sqlMod.prototype.user_verify= function(options, cb) {
-        return Q.fcall(function() {
-            var sql;
-            sql='select pwd from account where name=?';
-            return Q.nfcall(util.queryDatabase, sql, [options.name]);
-        }).then(function(result) {
-            console.log(result);
-            mem.get('code', function(err, val) {
-                if (err){
-                    return err;
-                }
-                else {
-                    if (val)
+        var temp=options.code;
+        if (temp.length) {
+            return Q.fcall(function () {
+                var sql;
+                sql = 'select pwd from account where name=?';
+                return Q.nfcall(util.queryDatabase, sql, [options.name]);
+            }).then(function (result) {
+                console.log(result);
+                mem.get('code', function (err, val) {
+                    if (err) {
+                        return err;
+                    }
+                    else {
+                        if (val)
 
-                        console.log('code', val.toString(), 'code2', options.code);
+                            console.log('code', val.toString(), 'code2', options.code);
                         if (val.toString() == options.code) {
                             if (result.length) {
                                 var pass = result[0].pwd;
@@ -210,24 +212,6 @@ sqlMod = (function() {
                                     var _sql;
                                     _sql = 'update account set status=1 where name=?';
                                     return Q.nfcall(util.queryDatabase, _sql, [options.name]);
-                                    //mem.set('user_name', options.name, function(err, result) {
-                                    //    if (err) {
-                                    //        return {err:0}
-                                    //    }
-                                    //    else
-                                    //    {
-                                    //        return {mes:'ok'}
-                                    //    }
-                                    //},3600*4);
-                                    //mem.set('pwd', result[0].pwd, function(err, result) {
-                                    //    if (err) {
-                                    //        return {err:0}
-                                    //    }
-                                    //    else
-                                    //    {
-                                    //        return {mes:'ok'}
-                                    //    }
-                                    //},3600*24);
                                 }
                             }
                             else {
@@ -242,55 +226,22 @@ sqlMod = (function() {
                         }
                     }
 
+                });
+            }).then(function (result) {
+                return cb({
+                    msg: 'success'
+                });
+            }).fail(function (err) {
+                return cb({
+                    err: "inner failed"
+                });
+                return logger.error("failed:", err);
             });
-            //if(result.length){
-            //    var pass=result[0].pwd;
-            //    var follow_pass=options.pwd;
-            //    if (pass != follow_pass)
-            //        return cb({
-            //            err: "password or name wrong"
-            //        });
-            //
-            //    else
-            //    {
-            //        mem.set('user_name', options.name, function(err, result) {
-            //            if (err) {
-            //                return {err:0}
-            //            }
-            //            else
-            //            {
-            //                return {mes:'ok'}
-            //            }
-            //        },3600*4);
-            //        mem.set('pwd', result[0].pwd, function(err, result) {
-            //            if (err) {
-            //                return {err:0}
-            //            }
-            //            else
-            //            {
-            //                return {mes:'ok'}
-            //            }
-            //        },3600*24);
-            //        return cb({
-            //            data: "welcome"
-            //        });
-            //    }
-            //}
-            //else{
-            //    return cb({
-            //        err: "password or name wrong"
-            //    });
-            //}
-        }).then(function(result) {
+        }else{
             return cb({
-                msg:'success'
+                msg: 'error'
             });
-        }).fail(function(err) {
-            return cb({
-                err: "inner failed"
-            });
-            return logger.error("failed:", err);
-        });
+        }
 
     };
 
