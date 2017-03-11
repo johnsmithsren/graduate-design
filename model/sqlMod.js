@@ -113,12 +113,12 @@ sqlMod = (function() {
         return Q.fcall(function () {
             var sql;
             sql = 'select * from account where account=?';
-            return Q.nfcall(util.queryDatabase, sql, [options.account]);
+            return Q.nfcall(util.queryDatabase, sql, [options.name]);
         }).then(function (result) {
-            _data.push(result);
+            _data.push(result[0]);
             var sql2;
             sql2 = 'select * from gps_info where shoe_code=?';
-            return Q.nfcall(util.queryDatabase, sql2, [result.shoe_code]);
+            return Q.nfcall(util.queryDatabase, sql2, [result[0].shoe_code]);
         }).then(function (result) {
             _data.push(result);
             return cb({
