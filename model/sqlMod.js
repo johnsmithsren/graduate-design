@@ -55,7 +55,7 @@ sqlMod = (function() {
         }).then(function(result) {
             if(result.length){
                 var sql ='select * from gps_info where shoecode=?';
-                return util.queryDatabase(sql, [result.showcode], function(err, result) {
+                return util.queryDatabase(sql, [result.shoecode], function(err, result) {
                     if (err) {
                         return logger.error("failed:", err);
                     }
