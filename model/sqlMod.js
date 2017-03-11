@@ -48,7 +48,32 @@ sqlMod = (function() {
         });
     };
     sqlMod.prototype.get_stepdata= function(options, cb) {
-        var sql='';
+        return Q.fcall(function() {
+            var sql;
+            sql='select * from account where account= ?';
+            return Q.nfcall(util.queryDatabase, sql, [options.name]);
+        }).then(function(result) {
+            if(result.length){
+                var sql ='select * from gps_info where shoecode=?';
+                var _data = _.pick(options, result.showcode);
+                return util.queryDatabase(sql, [_data], function(err, result) {
+                    if (err) {
+                        return logger.error("failed:", err);
+                    }
+                    return cb({
+                        err: 0
+                    });
+                });
+            }else{
+                return cb({
+                    err: 1
+                });
+            }
+        }).fail(function(err) {
+            return logger.error("failed:",err);
+        });
+
+        var sql='select * from gps_info where shoecode=?';
         var data=_.pick(options, 'longitude', 'latitude');
         return util.queryDatabase(sql, [data], function(err, result) {
             if (err) {
