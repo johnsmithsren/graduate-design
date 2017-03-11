@@ -72,6 +72,7 @@ send_code = (function() {
             });
     };
     send_code.prototype.send_mail= function(req, res) {
+        var account=req.query.account
 
         var mailOptions = {
             from: '1149104294@qq.com ', // sender address
@@ -79,7 +80,8 @@ send_code = (function() {
             subject: 'Hello', // Subject line
             text: 'Hello world ✔', // plaintext body
             html: '<style type="text/css">a, a:hover, a:visited{color:#1A71C0;text-decoration: underline;}</style>'+
-            '<table border="0"><tr><td style="font-size:14px;text-align: left;">您好请点击此地址重新设置密码 http://demaciaspower.cn/reset</td> </tr>'+
+            '<table border="0"><tr><td style="font-size:14px;text-align: left;">您好请点击此地址重新设置密码 http://demaciaspower.cn/reset?'+account+
+            '</td> </tr>'+
             '<tr><td style="font-size:12px;text-align: left;"><tr>'+
             '</tr><tr>'+
             '<td style="font-size:14px;text-align: left;">此邮件为自动发送，请勿回复！</td></tr></table>'

@@ -194,53 +194,54 @@ sqlMod = (function() {
                     return err;
                 }
                 else {
-                    console.log('code',val.toString(),'code2',options.code);
-                    //_name=val.toString();
-                    if (val.toString()==options.code) {
-                        if(result.length){
-                            var pass=result[0].pwd;
-                            var follow_pass=options.pwd;
-                            if (pass != follow_pass)
+                    if (val)
+
+                        console.log('code', val.toString(), 'code2', options.code);
+                        if (val.toString() == options.code) {
+                            if (result.length) {
+                                var pass = result[0].pwd;
+                                var follow_pass = options.pwd;
+                                if (pass != follow_pass)
+                                    return cb({
+                                        err: "password or name wrong"
+                                    });
+
+                                else {
+                                    var _sql;
+                                    _sql = 'update account set status=1 where name=?';
+                                    return Q.nfcall(util.queryDatabase, _sql, [options.name]);
+                                    //mem.set('user_name', options.name, function(err, result) {
+                                    //    if (err) {
+                                    //        return {err:0}
+                                    //    }
+                                    //    else
+                                    //    {
+                                    //        return {mes:'ok'}
+                                    //    }
+                                    //},3600*4);
+                                    //mem.set('pwd', result[0].pwd, function(err, result) {
+                                    //    if (err) {
+                                    //        return {err:0}
+                                    //    }
+                                    //    else
+                                    //    {
+                                    //        return {mes:'ok'}
+                                    //    }
+                                    //},3600*24);
+                                }
+                            }
+                            else {
                                 return cb({
                                     err: "password or name wrong"
                                 });
-
-                            else
-                            {
-                                var _sql;
-                                _sql='update account set status=1 where name=?';
-                                return Q.nfcall(util.queryDatabase, _sql, [options.name]);
-                                //mem.set('user_name', options.name, function(err, result) {
-                                //    if (err) {
-                                //        return {err:0}
-                                //    }
-                                //    else
-                                //    {
-                                //        return {mes:'ok'}
-                                //    }
-                                //},3600*4);
-                                //mem.set('pwd', result[0].pwd, function(err, result) {
-                                //    if (err) {
-                                //        return {err:0}
-                                //    }
-                                //    else
-                                //    {
-                                //        return {mes:'ok'}
-                                //    }
-                                //},3600*24);
                             }
-                        }
-                        else{
+                        } else {
                             return cb({
-                                err: "password or name wrong"
+                                err: "code wrong"
                             });
                         }
-                    } else {
-                        return cb({
-                            err: "code wrong"
-                        });
                     }
-                }
+
             });
             //if(result.length){
             //    var pass=result[0].pwd;
@@ -338,6 +339,15 @@ sqlMod = (function() {
     };
     sqlMod.prototype.set_user_pass= function(options, cb) {
         return Q.fcall(function() {
+        //    var account=options.account;
+        //    if (account){
+        //        var _sql='select * from account where account=?'
+        //        return Q.nfcall(util.queryDatabase, _sql, [account]);
+        //    }
+        //    return cb({
+        //        err:'Email ERROR'
+        //    });
+        //}).then(function(result) {
             var pwd=options.pwd;
             var account=options.account;
             var sql;

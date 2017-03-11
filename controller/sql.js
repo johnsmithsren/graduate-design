@@ -72,6 +72,7 @@ sqltest = (function() {
         });
     };
     sqltest.prototype.set_user_pass = function(req, res) {
+        console.log(req.query,req.body);
         return sqlMod.set_user_pass(req.query, function(result) {
             return res.send(result);
         });
