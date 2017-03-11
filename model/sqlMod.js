@@ -53,14 +53,15 @@ sqlMod = (function() {
             sql='select * from account where account= ?';
             return Q.nfcall(util.queryDatabase, sql, [options.name]);
         }).then(function(result) {
+            console.log(result)
             if(result.length){
                 var sql ='select * from gps_info where shoe_code=?';
-                return util.queryDatabase(sql, [result.shoe_code], function(err, result) {
+                return util.queryDatabase(sql, [result[0].shoe_code], function(err, result) {
                     if (err) {
                         return logger.error("failed:", err);
                     }
                     return cb({
-                        err: 0
+                        data:result
                     });
                 });
             }else{
