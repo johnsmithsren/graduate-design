@@ -76,9 +76,9 @@ send_code = (function() {
 
         var mailOptions = {
             from: '1149104294@qq.com ', // sender address
-            to: '1149104294@qq.com', // list of receivers
-            subject: 'Hello', // Subject line
-            text: 'Hello world ✔', // plaintext body
+            to: account, // list of receivers
+            subject: 'Account', // Subject line
+            text: '用户', // plaintext body
             html: '<style type="text/css">a, a:hover, a:visited{color:#1A71C0;text-decoration: underline;}</style>'+
             '<table border="0"><tr><td style="font-size:14px;text-align: left;">您好请点击此地址重新设置密码 http://demaciaspower.cn/reset?'+account+
             '</td> </tr>'+
