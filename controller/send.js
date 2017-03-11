@@ -72,7 +72,7 @@ send_code = (function() {
             });
     };
     send_code.prototype.send_mail= function(req, res) {
-        var account=req.query.account
+        var account=req.body.account
 
         var mailOptions = {
             from: '1149104294@qq.com ', // sender address

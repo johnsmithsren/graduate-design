@@ -27,7 +27,6 @@ html
                });
             });
             $('.reset').on('click', function (c) {
-               var username = $('#username').val();
                var password = $('#password').val();
                $.ajax({
                   url: "http://www.demaciaspower.cn/reset_user_pass",
@@ -44,7 +43,7 @@ html
          });
             });
          });
-      h1 login
+      h1 重置密码
       .login-form
          .close
          .head-info
@@ -52,10 +51,10 @@ html
             label.lbl-2
             label.lbl-3
          .clear
-         .avtar
-            img(src='images/avtar.png')
+         //.avtar
+         //   img(src='images/avtar.png')
          form
-            input.text(id='username' type='text', value='Username', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Username';}")
+            //input.text(id='username' type='text', value='Username', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Username';}")
             .key
                input(id='password' type='text', value='Password', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Password';}")
          .reset
