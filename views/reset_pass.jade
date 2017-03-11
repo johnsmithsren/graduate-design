@@ -1,67 +1,77 @@
-//
-   Created by renjm on 17/3/10.
-
-//Created by renjm on 17/2/17.
 doctype html
 html
-   head
-      title Login
-      meta(name='viewport', content='width=device-width, initial-scale=1')
-      script(type='application/x-javascript').
-         addEventListener("load", function () {
-            setTimeout(hideURLbar, 0);
-         }, false); function hideURLbar() {
-            window.scrollTo(0, 1);
-         }
-      meta(name='keywords', content='Flat Dark Web Login Form Responsive Templates, Iphone Widget Template, Smartphone login forms,Login form, Widget Template, Responsive Templates, a Ipad 404 Templates, Flat Responsive Templates')
-      link(href='/stylesheets/login.css', rel='stylesheet', type='text/css')
-      link(href='http://fonts.useso.com/css?family=PT+Sans:400,700,400italic,700italic|Oswald:400,300,700', rel='stylesheet', type='text/css')
-      link(href='http://fonts.useso.com/css?family=Exo+2', rel='stylesheet', type='text/css')
-      script(src='http://ajax.useso.com/ajax/libs/jquery/1.11.0/jquery.min.js')
-   body
-      script.
-         $(document).ready(function (c) {
-            $('.close').on('click', function (c) {
-               $('.login-form').fadeOut('slow', function (c) {
-                  $('.login-form').remove();
-               });
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        title Forms
+        link(href="css/bootstrap.min.css", rel="stylesheet")
+        //link(href="css/datepicker3.css", rel="stylesheet")
+        link(href="css/styles.css", rel="stylesheet")
+    .error
+    body
+        .row
+            .col-xs-10.col-xs-offset-1.col-sm-8.col-sm-offset-2.col-md-4.col-md-offset-4
+                .login-panel.panel.panel-default
+                    .panel-heading 修改密码
+                    |
+                    .panel-body
+                        form(role="form")
+                            fieldset
+                                .form-group
+                                    input#password.form-control(id='reset'  placeholder="Password", name="password", type="text", value="")
+
+
+                                a#forget.btn.btn-primary(href="forget_pass.html") 修改
+            // /.col
+        // /.row
+        script(src="js/jquery-1.11.1.min.js")
+        |
+        script(src="js/bootstrap.min.js")
+        |
+        script(src="js/chart.min.js")
+        |
+        script(src="js/chart-data.js")
+        |
+        script(src="js/easypiechart.js")
+        |
+        script(src="js/easypiechart-data.js")
+        |
+        script(src="js/login.js")
+        // <script src="/try/bootstrap/twitter-bootstrap-v2/docs/assets/js/bootstrap-alert.js"></script>
+        //
+          作者：renjm@jiagouyun.com
+          时间：2017-03-03
+          描述：
+          <script src="js/bootstrap-datepicker.js"></script>
+        script.
+            !function ($) {
+                $(document).on("click", "ul.nav li.parent > a > span.icon", function () {
+                    $(this).find('em:first').toggleClass("glyphicon-minus");
+                });
+                $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+            }(window.jQuery);
+            $(window).on('resize', function () {
+                if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+            })
+            $(window).on('resize', function () {
+                if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+            })
+
+            $('#reset').on('click', function (c) {
+                var password = $('#password').val();
+                var username = window.location.search;
+                console.log(username);
             });
-            $('.reset').on('click', function (c) {
-               var password = $('#password').val();
-               $.ajax({
-                  url: "http://www.demaciaspower.cn/reset_user_pass",
-                  data: {
-                     account:username,
-                     pwd:password
-                  },
-                  type: "GET",
-                  dataType : "json",
-                  success:function(data){
-                     if(data){
-                     }
-                  }
-         });
-            });
-         });
-      h1 重置密码
-      .login-form
-         .close
-         .head-info
-            label.lbl-1
-            label.lbl-2
-            label.lbl-3
-         .clear
-         //.avtar
-         //   img(src='images/avtar.png')
-         form
-            //input.text(id='username' type='text', value='Username', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Username';}")
-            .key
-               input(id='password' type='text', value='Password', onfocus="this.value = '';", onblur="if (this.value == '') {this.value = 'Password';}")
-         .reset
-            button(type='button',value='Reset') 重置密码
-      .copy-rights
-         p
-            | Copyright © 2016.Company name All rights RenJianMin
-            a(href='', target='_blank', title='about-page') about
-            | If you want to get help ,click here
-            a(href='', title='help-page', target='_blank') help
+//                $.ajax({
+//                    url: "http://www.demaciaspower.cn/reset_user_pass",
+//                    data: {
+//                        account:username,
+//                        pwd:password
+//                    },
+//                    type: "GET",
+//                    dataType : "json",
+//                    success:function(data){
+//                        if(data){
+//                        }
+//                    }
+
