@@ -129,12 +129,16 @@ sqlMod = (function() {
         });
     };
     sqlMod.prototype.update_userprofile= function(options, cb) {
+        console.log(options)
         return Q.fcall(function () {
             var sql;
-            sql = 'update account set update_time=unix_timestamp(now()),? where account=?';
+            sql = 'update account set update_time=unix_timestamp(now()),?  where account=?';
             var _data = _.pick(options, 'pwd', 'name', 'tel', 'account','shoe_code','weight');
             return Q.nfcall(util.queryDatabase, sql, [_data,options.account]);
-
+        }).then(function () {
+            return cb({
+                msg:'success'
+            });
         }).fail(function (err) {
             return logger.error("failed:", err);
         });

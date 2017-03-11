@@ -57,7 +57,7 @@ sqltest = (function() {
         });
     };
     sqltest.prototype.update_userprofile = function(req, res) {
-        return sqlMod.update_userprofile(req.query, function(result) {
+        return sqlMod.update_userprofile(req.body, function(result) {
             return res.send(result);
         });
     };
