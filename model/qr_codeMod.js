@@ -32,8 +32,8 @@ getQrcode = (function() {
     getQrcode.prototype.getmess = function(options, cb) {
         return Q.fcall(function() {
             var sql;
-            sql='select * from account where name= ?';
-            return Q.nfcall(util.queryDatabase, sql, [options.name]);
+            sql='select * from gps_info where shoe_code= ?';
+            return Q.nfcall(util.queryDatabase, sql, [options.shoe_code]);
         }).then(function(result) {
             if(result){
                 return cb({
