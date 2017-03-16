@@ -143,9 +143,23 @@ sqlMod = (function() {
             return logger.error("failed:", err);
         });
     };
+    sqlMod.prototype.user_account= function(options, cb) {
+        return Q.fcall(function () {
+            var sql;
+            sql = 'select a.account,b.battery,a.create_time,a.name,a.status,a.tel,a.shoe_code from account a left join shoe_info b on b.shoe_code=a.shoe_code';
+            return Q.nfcall(util.queryDatabase, sql, []);
+        }).then(function(result) {
+            return cb({
+                msg:'success',
+                data:result
+            });
+        }).fail(function (err) {
+            return logger.error("failed:", err);
+        });
+    };
     sqlMod.prototype.get_userInfo= function(options, cb) {
         console.log(options)
-        sql='select * from account where account=? and status=1';
+        var sql='select * from account where account=? and status=1';
         return util.queryDatabase(sql, [options.name], function(err, result) {
             if (err) {
                 return logger.error("failed:", err);

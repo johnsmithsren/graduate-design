@@ -97,6 +97,34 @@ send_code = (function() {
         });
 
     }
+    send_code.prototype.sendmail= function(req, res) {
+        var sql='select * from account where account=? ';
+        return util.queryDatabase(sql, [req.query.name], function(err, result) {
+            var mailOptions = {
+                from: '1149104294@qq.com ', // sender address
+                to: '1149104294@qq.com' ||result[0].name, // list of receivers
+                subject: 'Account', // Subject line
+                text: '用户', // plaintext body
+                html: '<style type="text/css">a, a:hover, a:visited{color:#1A71C0;text-decoration: underline;}</style>'+
+                '<table border="0"><tr><td style="font-size:14px;text-align: left;">+hello'+
+                '</td> </tr>'+
+                '<tr><td style="font-size:12px;text-align: left;"><tr>'+
+                '</tr><tr>'+
+                '<td style="font-size:14px;text-align: left;">此邮件为自动发送，请勿回复！</td></tr></table>'
+            };
+            res.setHeader('Access-Control-Allow-Origin','*');
+            transporter.sendMail(mailOptions, function(error, info){
+                if(error){
+                    console.log(error);
+                }else{
+                    console.log('Message sent: ' + info.response);
+                    res.send('success');
+                }
+            });
+        });
+
+
+    }
     return send_code;
 
 })();
