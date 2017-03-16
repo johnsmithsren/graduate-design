@@ -36,6 +36,7 @@ router.post('/user/login/sign_up',ctrls.sql.userinsert);
 router.post('/user/login/user_verify',ctrls.sql.user_verify);
 router.post('/user/find_pass',ctrls.send.send_mail);
 router.get('/sendmail',ctrls.send.sendmail);
+router.get('/getstepdata',ctrls.sql.getstepdata);
 router.get('/login',ctrls.log);
 router.get('/user_account',ctrls.sql.user_account);
 

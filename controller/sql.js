@@ -72,13 +72,17 @@ sqltest = (function() {
         });
     };
     sqltest.prototype.user_account = function(req, res) {
-        res.setHeader("Access-Control-Allow-Origin", "*");
         return sqlMod.user_account(req.query, function(result) {
             return res.send(result);
         });
     };
     sqltest.prototype.set_user_pass = function(req, res) {
         return sqlMod.set_user_pass(req.query, function(result) {
+            return res.send(result);
+        });
+    };
+    sqltest.prototype.getstepdata = function(req, res) {
+        return sqlMod.getstepdata(req.query, function(result) {
             return res.send(result);
         });
     };

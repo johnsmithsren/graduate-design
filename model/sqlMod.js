@@ -197,6 +197,29 @@ sqlMod = (function() {
         });
 
     };
+    sqlMod.prototype.getstepdata= function(options, cb) {
+
+        return Q.fcall(function() {
+            var sql;
+            sql='select * from account where account=?';
+            return Q.nfcall(util.queryDatabase, sql, [options.name]);
+        }).then(function(result) {
+            if(result.length){
+                var _sql='select sum(step_number) from gps_info where shoe_code=?';
+                return Q.nfcall(util.queryDatabase,_sql, [result[0].shoe_code]);
+
+            }else{
+                return cb({
+                    err: "account doest exist"
+                });
+
+            }
+        }).fail(function(err) {
+
+            return logger.error("failed:",err);
+        });
+
+    };
     //sqlMod.prototype.delete_list= function(options, cb) {
     //    return Q.fcall(function() {
     //        var sql;
