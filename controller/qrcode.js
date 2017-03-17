@@ -33,7 +33,7 @@ qr_code = (function() {
     };
     qr_code.prototype.getcode= function(req, res) {
         var text='http://www.demaciaspower.cn/getmess?shoe_code=CE56A2F6ACD8';
-        var img = qr.image(text,{size :10});
+        var img = qr.image(text,{size :5});
         res.writeHead(200, {'Content-Type': 'image/png'});
         img.pipe(res);
         //return qr_codeMod.getcode(req.query, function(result) {
