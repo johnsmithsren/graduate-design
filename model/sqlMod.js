@@ -256,14 +256,12 @@ sqlMod = (function() {
                 sql = 'select pwd from account where name=?';
                 return Q.nfcall(util.queryDatabase, sql, [options.name]);
             }).then(function (result) {
-                console.log(result);
                 mem.get('code', function (err, val) {
                     if (err) {
                         return err;
                     }
                     else {
                         if (val)
-
                             console.log('code', val.toString(), 'code2', options.code);
                         if (val.toString() == options.code) {
                             if (result.length) {
@@ -277,7 +275,11 @@ sqlMod = (function() {
                                 else {
                                     var _sql;
                                     _sql = 'update account set status=1 where name=?';
-                                    return Q.nfcall(util.queryDatabase, _sql, [options.name]);
+                                    return util.queryDatabase(_sql, [options.name], function(err, result) {
+                                        return cb({
+                                            msg: 'success'
+                                        });
+                                    });
                                 }
                             }
                             else {
@@ -285,17 +287,13 @@ sqlMod = (function() {
                                     err: "password or name wrong"
                                 });
                             }
-                        } else {
+                        }else{
                             return cb({
                                 err: "code wrong"
                             });
                         }
                     }
 
-                });
-            }).then(function (result) {
-                return cb({
-                    msg: 'success'
                 });
             }).fail(function (err) {
                 return cb({
@@ -305,7 +303,7 @@ sqlMod = (function() {
             });
         }else{
             return cb({
-                msg: 'error'
+                err: 'error'
             });
         }
 
