@@ -19,7 +19,7 @@ server.on('message', function(msg, rinfo){
         latitude:temp_data[3],
         step_number:temp_data[6],
         voltage:temp_data[5],
-        deviceId:temp_data[0]
+        shoe_code:temp_data[0]
     };
     return util.queryDatabase(sql, [data], function(err, result) {
         if (err) {
