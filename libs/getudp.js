@@ -21,13 +21,10 @@ server.on('message', function(msg, rinfo){
         voltage:temp_data[5],
         shoe_code:temp_data[0]
     };
-    return util.queryDatabase(sql, [data], function(err, result) {
+    util.queryDatabase(sql, [data], function(err, result) {
         if (err) {
             return logger.error("failed:", err);
         }
-        return cb({
-            data: result
-        });
     });
 
 
