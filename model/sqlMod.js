@@ -250,13 +250,14 @@ sqlMod = (function() {
     //};
     sqlMod.prototype.user_verify= function(options, cb) {
         var temp=options.code;
+        var name=options.account;
         if (temp.length) {
             return Q.fcall(function () {
                 var sql;
                 sql = 'select pwd from account where name=?';
                 return Q.nfcall(util.queryDatabase, sql, [options.name]);
             }).then(function (result) {
-                mem.get('code', function (err, val) {
+                mem.get(name, function (err, val) {
                     if (err) {
                         return err;
                     }
@@ -276,6 +277,9 @@ sqlMod = (function() {
                                         var _sql;
                                         _sql = 'update account set status=1 where name=?';
                                         return util.queryDatabase(_sql, [options.name], function (err, result) {
+                                            mem.delete(name,function(err, value, key) {
+                                                logger.info ('_deletecheckcode:', name)
+                                            });
                                             return cb({
                                                 msg: 'success'
                                             });

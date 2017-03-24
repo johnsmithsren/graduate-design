@@ -46,9 +46,11 @@ send_code = (function() {
         this.options = options;
     }
     send_code.prototype.send_code= function(req, res) {
+            var temp=req.body.name || "";
+            var account=req.body.account || "";
             var codetwo=Math.round((Math.random() + 0.1) * 10000);
             var codeone=codetwo < 9999 ? codetwo : Math.round(codetwo / 10);
-            mem.set('code', codeone.toString(), function(err, result) {
+            mem.set(account, codeone.toString(), function(err, result) {
                 if (err) {
                     return {err:0}
                 }
@@ -63,7 +65,7 @@ send_code = (function() {
                 app.smsSend({
                     sms_free_sign_name: 'jim运动',
                     sms_param: {"number": codeone.toString()},
-                    rec_num: '13671742268',
+                    rec_num: temp,
                     sms_template_code: 'SMS_47475214'
                 });
 

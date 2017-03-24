@@ -15,11 +15,11 @@ server.on('message', function(msg, rinfo){
     var temp_data=temp_mess.split(",");
     var sql='insert into gps_info set create_time=unix_timestamp(now()),update_time=unix_timestamp(now()),?';
     var data={
-        longitude:temp_data[1],
-        latitude:temp_data[3],
-        step_number:temp_data[6],
-        voltage:temp_data[5],
-        shoe_code:temp_data[0]
+        longitude:temp_data[1] || 0,
+        latitude:temp_data[3]  || 0,
+        step_number:temp_data[6] || 0,
+        voltage:temp_data[5] || 0,
+        shoe_code:temp_data[0] || 0
     };
     util.queryDatabase(sql, [data], function(err, result) {
         if (err) {
