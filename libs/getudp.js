@@ -4,7 +4,7 @@
 var dgram=require('dgram');
 var server = dgram.createSocket('udp4');
 var util=require('../libs/utils');
-
+var logger=require('logger').createLogger();
 server.on('listening', function(){
     console.info('server is listening');
 });
