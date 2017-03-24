@@ -261,39 +261,43 @@ sqlMod = (function() {
                         return err;
                     }
                     else {
-                        if (val)
+                        if (val) {
                             console.log('code', val.toString(), 'code2', options.code);
-                        if (val.toString() == options.code) {
-                            if (result.length) {
-                                var pass = result[0].pwd;
-                                var follow_pass = options.pwd;
-                                if (pass != follow_pass)
-                                    return cb({
-                                        err: "password or name wrong"
-                                    });
-
-                                else {
-                                    var _sql;
-                                    _sql = 'update account set status=1 where name=?';
-                                    return util.queryDatabase(_sql, [options.name], function(err, result) {
+                            if (val.toString() == options.code) {
+                                if (result.length) {
+                                    var pass = result[0].pwd;
+                                    var follow_pass = options.pwd;
+                                    if (pass != follow_pass) {
                                         return cb({
-                                            msg: 'success'
+                                            err: "密码用户名有误"
                                         });
+                                    }
+                                    else {
+                                        var _sql;
+                                        _sql = 'update account set status=1 where name=?';
+                                        return util.queryDatabase(_sql, [options.name], function (err, result) {
+                                            return cb({
+                                                msg: 'success'
+                                            });
+                                        });
+                                    }
+                                } else {
+                                    return cb({
+                                        err: "密码用户名有误，请检查"
                                     });
                                 }
                             }
                             else {
                                 return cb({
-                                    err: "password or name wrong"
+                                    err: "密码用户名有误，请检查"
                                 });
                             }
-                        }else{
+                        } else {
                             return cb({
-                                err: "code wrong"
+                                err: "验证码错误"
                             });
                         }
                     }
-
                 });
             }).fail(function (err) {
                 return cb({
