@@ -101,6 +101,8 @@ sqlMod = (function() {
         });
     };
     sqlMod.prototype.select_map_info= function(options, cb) {
+        var today=new Date().getTime();
+        today=JSON.stringify(today).substring(0,10);
         console.log('-------',options);
         sql='select a.*,b.weight from gps_info a left join account b on a.shoe_code=b.shoe_code where a.shoe_code=? and a.update_time > 1490428565 and b.status=1 order by id ASC';
         return util.queryDatabase(sql, [options.shoe_code], function(err, result) {
