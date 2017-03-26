@@ -30,7 +30,6 @@ sqltest = (function() {
         });
     };
     sqltest.prototype.gpsmapshow = function(req, res) {
-
         return sqlMod.gpsmapshow(req.query, function(result) {
             return res.send(result);
         });

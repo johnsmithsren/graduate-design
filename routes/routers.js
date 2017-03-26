@@ -21,7 +21,7 @@ router.get('/',ctrls.login);
 router.get('/send_news_message',ctrls.sql.send_new_message);
 router.post('/get_news',ctrls.sql.getnews);
 router.get('/gps',ctrls.sql.gpsmapshow);
-router.get('/update_list',ctrls.sql.update_list)
+router.get('/update_list',ctrls.sql.update_list);
 router.get('/get_userInfo',ctrls.sql.get_userInfo);
 router.get('/getcode',ctrls.qrcode.getcode);
 router.get('/select_map_info',ctrls.sql.select_map_info);
