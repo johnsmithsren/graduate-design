@@ -292,7 +292,7 @@ sqlMod = (function() {
                                     }
                                     else {
                                         var _sql;
-                                        _sql = 'update account set status=1 where =?';
+                                        _sql = 'update account set status=1 where account=?';
                                         return util.queryDatabase(_sql, [options.name], function (err, result) {
                                             mem.delete(name,function(err, value, key) {
                                                 logger.info ('_deletecheckcode:', name)
