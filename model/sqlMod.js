@@ -7,6 +7,7 @@ var logger=require('logger').createLogger();
 var _=require('underscore');
 var Q=require('q');
 var memcached = require('memjs');
+var _=require("underscore");
 var mem = memcached.Client.create('localhost'+ ':' + '11211');
 sqlMod = (function() {
     function sqlMod(options) {
@@ -60,6 +61,10 @@ sqlMod = (function() {
                     if (err) {
                         return logger.error("failed:", err);
                     }
+                    //for (var item in result.data){
+                    //    console.log(item);
+                    //}
+
                     return cb({
                         data:result
                     });
@@ -96,11 +101,21 @@ sqlMod = (function() {
         });
     };
     sqlMod.prototype.select_map_info= function(options, cb) {
-        console.log(options)
-        sql='select a.*,b.weight from gps_info a left join account b on a.shoe_code=b.shoe_code where a.shoe_code=? and b.status=1 order by id DESC limit 0,5';
+        console.log('-------',options);
+        sql='select a.*,b.weight from gps_info a left join account b on a.shoe_code=b.shoe_code where a.shoe_code=? and a.update_time > 1490428565 and b.status=1 order by id ASC';
         return util.queryDatabase(sql, [options.shoe_code], function(err, result) {
             if (err) {
                 return logger.error("failed:", err);
+            }
+            var info,i, len;
+            for (i = 0, len = result.length; i < len; i++) {
+                info = result[i];
+                var temp_lon=info.longitude;
+                var temp_lat=info.latitude;
+                var _temp_lon=parseInt(temp_lon/100)+(temp_lon%100)/60;
+                var _temp_lat=parseInt(temp_lat/100)+(temp_lat%100)/60;
+                result[i].longitude=_temp_lon;
+                result[i].latitude=_temp_lat;
             }
             return cb({
                 data: result
@@ -254,7 +269,7 @@ sqlMod = (function() {
         if (temp.length) {
             return Q.fcall(function () {
                 var sql;
-                sql = 'select pwd from account where name=?';
+                sql = 'select * from account where name=?';
                 return Q.nfcall(util.queryDatabase, sql, [options.name]);
             }).then(function (result) {
                 mem.get(name, function (err, val) {
@@ -267,6 +282,8 @@ sqlMod = (function() {
                             if (val.toString() == options.code) {
                                 if (result.length) {
                                     var pass = result[0].pwd;
+                                    var _shoe_code=result[0].shoe_code;
+                                    console.log(_shoe_code)
                                     var follow_pass = options.pwd;
                                     if (pass != follow_pass) {
                                         return cb({
@@ -275,13 +292,13 @@ sqlMod = (function() {
                                     }
                                     else {
                                         var _sql;
-                                        _sql = 'update account set status=1 where name=?';
+                                        _sql = 'update account set status=1 where =?';
                                         return util.queryDatabase(_sql, [options.name], function (err, result) {
                                             mem.delete(name,function(err, value, key) {
                                                 logger.info ('_deletecheckcode:', name)
                                             });
                                             return cb({
-                                                msg: 'success'
+                                                msg: _shoe_code
                                             });
                                         });
                                     }
@@ -293,12 +310,12 @@ sqlMod = (function() {
                             }
                             else {
                                 return cb({
-                                    err: "密码用户名有误，请检查"
+                                    err: "验证码有误，请检查"
                                 });
                             }
                         } else {
                             return cb({
-                                err: "验证码错误"
+                                err: "请填写验证码"
                             });
                         }
                     }
