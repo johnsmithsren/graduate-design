@@ -4,7 +4,7 @@
 var sqlMod;
 var util=require('../libs/utils');
 var logger=require('logger').createLogger();
-var _=require('underscore');
+var mysql=require('mysql');
 var Q=require('q');
 var memcached = require('memjs');
 var _=require("underscore");
@@ -102,10 +102,20 @@ sqlMod = (function() {
     };
     sqlMod.prototype.select_map_info= function(options, cb) {
         var today=new Date().getTime();
+        var _starttime=options.startTime;
+        var _endtime=options.endTime;
+        _starttime=_starttime.substring(0,10);
+        _endtime=_endtime.substring(0,10);
         today=JSON.stringify(today).substring(0,10);
         console.log('-------',options);
-        sql='select a.*,b.weight from gps_info a left join account b on a.shoe_code=b.shoe_code where a.shoe_code=? and a.update_time > 1490428565 and b.status=1 order by id ASC';
-        return util.queryDatabase(sql, [options.shoe_code], function(err, result) {
+        var sql="select a.*,b.weight from gps_info a left join account b on a.shoe_code=b.shoe_code where a.shoe_code=? and ";
+        if(_starttime && _endtime){
+            sql+="a.update_time between "+ (mysql.escape(_starttime))+ " and "+ (mysql.escape(_endtime))+" "
+        }else{
+            sql+="a.update_time >"+ (mysql.escape(today))+" ";
+        }
+        sql+="and b.status=1 and b.account=? order by id ASC";
+        return util.queryDatabase(sql, [options.shoe_code,options.account], function(err, result) {
             if (err) {
                 return logger.error("failed:", err);
             }
@@ -296,9 +306,9 @@ sqlMod = (function() {
                                         var _sql;
                                         _sql = 'update account set status=1 where account=?';
                                         return util.queryDatabase(_sql, [options.name], function (err, result) {
-                                            mem.delete(name,function(err, value, key) {
-                                                logger.info ('_deletecheckcode:', name)
-                                            });
+                                            //mem.delete(name,function(err, value, key) {
+                                            //    logger.info ('_deletecheckcode:', name)
+                                            //});
                                             return cb({
                                                 msg: _shoe_code
                                             });

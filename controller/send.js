@@ -61,7 +61,7 @@ send_code = (function() {
                 {
                     return {mes:'ok'}
                 }
-            },3600*4);
+            },60);
             return Q.fcall(function() {
                 var App = require('alidayu-node');
                 var app = new App('23662717','f9f36701700378198ecbf29e756a4d28');
@@ -78,7 +78,6 @@ send_code = (function() {
     };
     send_code.prototype.send_mail= function(req, res) {
         var account=req.body.account
-
         var mailOptions = {
             from: '1149104294@qq.com ', // sender address
             to: account, // list of receivers
