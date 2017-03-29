@@ -48,8 +48,6 @@ send_code = (function() {
     send_code.prototype.send_code= function(req, res) {
             var temp=req.body.name || "";
             var account=req.body.account || "";
-            console.log(account);
-
             var codetwo=Math.round((Math.random() + 0.1) * 10000);
             var codeone=codetwo < 9999 ? codetwo : Math.round(codetwo / 10);
             console.log("-------------------------code",codeone);
@@ -79,7 +77,7 @@ send_code = (function() {
     send_code.prototype.send_mail= function(req, res) {
         var account=req.body.account
         var mailOptions = {
-            from: '1149104294@qq.com ', // sender address
+            from: '1149104294@qq.com', // sender address
             to: account, // list of receivers
             subject: 'Account', // Subject line
             text: '用户', // plaintext body
@@ -107,7 +105,7 @@ send_code = (function() {
         return util.queryDatabase(sql, [req.query.name], function(err, result) {
             var mailOptions = {
                 from: '1149104294@qq.com ', // sender address
-                to: '1149104294@qq.com' ||result[0].name, // list of receivers
+                to: result[0].name || '' , // list of receivers
                 subject: req.query.title, // Subject line
                 text: '用户', // plaintext body
                 html: '<style type="text/css">a, a:hover, a:visited{color:#1A71C0;text-decoration: underline;}</style>'+

@@ -207,15 +207,30 @@ sqlMod = (function() {
                     err: '这个账号已经存在'
                 });
             }else{
-                var sql ='insert into account set create_time=unix_timestamp(now()),status=1,update_time=unix_timestamp(now()),last_logintime=unix_timestamp(now()),?';
-                var _data = _.pick(options, 'pwd', 'name', 'tel', 'account','shoe_code','weight');
-                return util.queryDatabase(sql, [_data], function(err, result) {
+                var _sql="select shoe_code from account where shoe_code=?";
+                return util.queryDatabase(_sql, [options.shoe_code], function(err, result) {
                     if (err) {
-                        return logger.error("failed:", err);
+                        logger.error("failed:", err);
+                        return cb({
+                            err: "内部错误"
+                        });
                     }
-                    return cb({
-                        err: 0
-                    });
+                    if(result.length){
+                        return cb({
+                            err: "此激活码已被注册"
+                        });
+                    }else{
+                        var sql ='insert into account set create_time=unix_timestamp(now()),status=1,update_time=unix_timestamp(now()),last_logintime=unix_timestamp(now()),?';
+                        var _data = _.pick(options, 'pwd', 'name', 'tel', 'account','shoe_code','weight');
+                        return util.queryDatabase(sql, [_data], function(err, result) {
+                            if (err) {
+                                return logger.error("failed:", err);
+                            }
+                            return cb({
+                                err: 0
+                            });
+                        });
+                    }
                 });
             }
         }).fail(function(err) {
