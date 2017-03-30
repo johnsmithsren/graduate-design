@@ -6,6 +6,7 @@ var util=require('../libs/utils');
 var logger=require('logger').createLogger();
 var mysql=require('mysql');
 var Q=require('q');
+var uuid=require('uuid');
 var memcached = require('memjs');
 var _=require("underscore");
 var mem = memcached.Client.create('localhost'+ ':' + '11211');
@@ -185,15 +186,30 @@ sqlMod = (function() {
         });
     };
     sqlMod.prototype.get_userInfo= function(options, cb) {
-        console.log(options)
-        var sql='select * from account where account=? and status=1';
+        var sql='select last_logintime,account,tel,name,status,shoe_code from account where account=? and status=1';
         return util.queryDatabase(sql, [options.name], function(err, result) {
             if (err) {
                 return logger.error("failed:", err);
             }
-            return cb({
-                data: result
-            });
+            else{
+                console.log(result);
+                var today=new Date().getTime();
+                today=JSON.stringify(today).substring(0,10)
+                var login_time=+(result[0].last_logintime);
+                var temp=+today-login_time;
+                console.log(today,login_time,temp);
+                if (temp>43200){
+                    return cb({
+                        data:"relogin"
+                    });
+                }
+                else{
+                    return cb({
+                        data: result
+                    });
+                }
+            }
+
         });
     };
     sqlMod.prototype.userinsert= function(options, cb) {
@@ -310,7 +326,7 @@ sqlMod = (function() {
                                 if (result.length) {
                                     var pass = result[0].pwd;
                                     var _shoe_code=result[0].shoe_code;
-                                    console.log(_shoe_code)
+                                    console.log(_shoe_code);
                                     var follow_pass = options.pwd;
                                     if (pass != follow_pass) {
                                         return cb({
@@ -319,13 +335,21 @@ sqlMod = (function() {
                                     }
                                     else {
                                         var _sql;
-                                        _sql = 'update account set status=1 where account=?';
+                                        var token=uuid.v4();
+                                        _sql = 'update account set status=1,last_logintime=unix_timestamp(now()) where account=?';
+                                        mem.set(token,'1', function(err, result) {
+                                            if (err) {
+                                                console.log(err);
+                                            }
+                                            else
+                                            {
+                                                console.log("success");
+                                            }
+                                        },43200);
                                         return util.queryDatabase(_sql, [options.name], function (err, result) {
-                                            //mem.delete(name,function(err, value, key) {
-                                            //    logger.info ('_deletecheckcode:', name)
-                                            //});
                                             return cb({
-                                                msg: _shoe_code
+                                                msg: _shoe_code,
+                                                token:token
                                             });
                                         });
                                     }
