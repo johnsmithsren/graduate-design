@@ -366,7 +366,7 @@ sqlMod = (function() {
                             }
                         } else {
                             return cb({
-                                err: "请填写验证码"
+                                err: "验证码失效，请重发验证码"
                             });
                         }
                     }
