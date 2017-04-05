@@ -407,6 +407,22 @@ sqlMod = (function() {
         });
 
     };
+    sqlMod.prototype.get_usertask= function(options, cb) {
+        return Q.fcall(function() {
+
+            var sql;
+            sql='select * from day_task where account=?';
+            return Q.nfcall(util.queryDatabase, sql, [options.account]);
+        }).then(function(result) {
+            return cb({
+                data: result
+            });
+
+        }).fail(function(err) {
+            return logger.error("failed:", err);
+        });
+
+    };
     sqlMod.prototype.send_new_message= function(options, cb) {
         return Q.fcall(function() {
             var _title=options.title;
@@ -428,6 +444,66 @@ sqlMod = (function() {
         });
 
     };
+
+    sqlMod.prototype.finish_task= function(options, cb) {
+        return Q.fcall(function() {
+            var _account=options.account;
+            var _task=options.task;
+            var sql;
+            sql='update day_task set status=0 where account=? and task= ?';
+            return Q.nfcall(util.queryDatabase, sql, [_account,_task]);
+        }).then(function(result) {
+            return cb({
+                msg:'success'
+            });
+
+        }).fail(function(err) {
+            logger.error("failed:", err);
+            return cb({
+                err:'fail'
+            });
+        });
+
+    };
+    sqlMod.prototype.delete_task= function(options, cb) {
+        return Q.fcall(function() {
+            var _account=options.account;
+            var _task=options.task;
+            var sql;
+            sql='delete from day_task where account=? and task= ?';
+            return Q.nfcall(util.queryDatabase, sql, [_account,_task]);
+        }).then(function(result) {
+            return cb({
+                msg:'success'
+            });
+
+        }).fail(function(err) {
+            logger.error("failed:", err);
+            return cb({
+                err:'fail'
+            });
+        });
+
+    };
+    sqlMod.prototype.add_task= function(options, cb) {
+        return Q.fcall(function() {
+            var _account=options.account;
+            var _task=options.task;
+            var sql;
+            sql='insert into day_task set status=1,task= ? , create_time=unix_timestamp(now()),update_time=unix_timestamp(now()),time=unix_timestamp(now()),account=?';
+            return Q.nfcall(util.queryDatabase, sql, [_task,_account]);
+        }).then(function(result) {
+            return cb({
+                msg:'success'
+            });
+
+        }).fail(function(err) {
+            return logger.error("failed:", err);
+        });
+
+    };
+
+
     sqlMod.prototype.set_user_pass= function(options, cb) {
         return Q.fcall(function() {
             var account=options.account;
