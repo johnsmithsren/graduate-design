@@ -92,7 +92,6 @@ sqltest = (function() {
         });
     };
     sqltest.prototype.get_usertask = function(req, res) {
-        res.setHeader("Access-Control-Allow-Origin", "*");
         return sqlMod.get_usertask(req.query, function(result) {
             return res.send(result);
         });
@@ -103,19 +102,16 @@ sqltest = (function() {
         });
     };
     sqltest.prototype.finish_task = function(req, res) {
-        res.setHeader("Access-Control-Allow-Origin", "*");
         return sqlMod.finish_task(req.query, function(result) {
             return res.send(result);
         });
     };
     sqltest.prototype.add_task = function(req, res) {
-        res.setHeader("Access-Control-Allow-Origin", "*");
         return sqlMod.add_task(req.query, function(result) {
             return res.send(result);
         });
     };
     sqltest.prototype.delete_task = function(req, res) {
-        res.setHeader("Access-Control-Allow-Origin", "*");
         return sqlMod.delete_task(req.query, function(result) {
             return res.send(result);
         });
