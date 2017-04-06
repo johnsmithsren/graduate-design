@@ -12,7 +12,24 @@ var ctrls = require('../controller/index');
 ////});
 //};
 //module.exports = function(app, router) {
-
+url=["/send_news_message",'/update_list','/get_news','/gps',
+    '/update_list','/get_userInfo',
+    '/getcode','/select_map_info','/get_userprofile',
+    '/user/send_code','/user/task_info','/getmess','/select','/delete_list','/show_todolist',
+    '/user/login/sign_up','/user/login/user_verify','/user/find_pass','/sendmail','/getstepdata','/login',
+    '/user_account','/user/finish_task','/user/delete_task','/user/add_task','/reset','/reset_user_pass',
+    '/sign_up','/dashboard','/chart','/user_logout','/to_do_list','/get_stepdata','/dashboard/logout'
+];
+auth = function(req, res, next) {
+    for (item in url){
+        if (url[item]==req.url) {
+            return next()
+        }
+        else{
+           return res.send({err:"没有权限"})
+        }
+    }
+};
 
 
 
@@ -28,7 +45,7 @@ router.get('/select_map_info',ctrls.sql.select_map_info);
 router.get('/get_userprofile',ctrls.sql.get_userprofile);
 router.post('/update_userprofile',ctrls.sql.update_userprofile);
 router.post('/user/send_code',ctrls.send.send_code);
-router.get('/user/task_info',ctrls.sql.get_usertask)
+router.get('/user/task_info',  ctrls.sql.get_usertask)
 router.get('/getmess',ctrls.qrcode.getmess);
 router.get('/select',ctrls.sql.sqlselect);
 router.get('/delete_list',ctrls.sql.delete_list);

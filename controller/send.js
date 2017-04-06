@@ -22,6 +22,14 @@ var transporter = nodemailer.createTransport({
         pass: "rjm10201993" // 密码
     }
 });
+var App = require('alidayu-node');
+var app = new App('23662717','f9f36701700378198ecbf29e756a4d28');
+app.smsSend({
+    sms_free_sign_name: 'jim运动',
+    sms_param: {"number": '213123'},
+    rec_num: '13671742268',
+    sms_template_code: 'SMS_47475214'
+});
 //exports.send_code = function(req, res) {
 //    var codetwo=Math.round((Math.random() + 0.1) * 10000);
 //    var codeone=codetwo < 9999 ? codetwo : Math.round(codetwo / 10);

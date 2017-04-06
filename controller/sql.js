@@ -92,6 +92,7 @@ sqltest = (function() {
         });
     };
     sqltest.prototype.get_usertask = function(req, res) {
+        console.log(req.headers,req.url)
         return sqlMod.get_usertask(req.query, function(result) {
             return res.send(result);
         });
