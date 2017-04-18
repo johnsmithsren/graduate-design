@@ -437,13 +437,13 @@ function mapshow(first_point, temp_data) {
         }
         //$('#easypiechart-red').data('easyPieChart').options.barColor = '#0033CC';
         //$('#easypiechart-red').data('easyPieChart').update(Speed.toFixed(2));
-        $('#red').text(Speed.toFixed(2));
-        $('#blue').text(Dis.toFixed(2));
-        $('#teal').text(time2.toFixed(2));
-        $('#grey').text((Calorie).toFixed(2));
-        $('#easypiechart-teal').data('easyPieChart').update(time2);
-        $('#easypiechart-blue').data('easyPieChart').update(Dis.toFixed(2));
-        $('#easypiechart-grey').data('easyPieChart').update((Calorie*250).toFixed(2));
+        //$('#red').text(Speed.toFixed(2));
+        //$('#blue').text(Dis.toFixed(2));
+        //$('#teal').text(time2.toFixed(2));
+        //$('#grey').text((Calorie).toFixed(2));
+        //$('#easypiechart-teal').data('easyPieChart').update(time2);
+        //$('#easypiechart-blue').data('easyPieChart').update(Dis.toFixed(2));
+        //$('#easypiechart-grey').data('easyPieChart').update((Calorie*250).toFixed(2));
         translateCallback = function(data) {
             if(data.status === 0) {
                 var color=['#33ffff','#33ffcc','#33ff99','#33ff66','#33ff33','#33ff00','#33cc00','#33cc33','#339900','#006400']
