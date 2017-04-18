@@ -435,8 +435,8 @@ function mapshow(first_point, temp_data) {
 //			$('.Calorie').text((Calorie * 1000).toFixed(2));
 
         }
-        $('#easypiechart-red').data('easyPieChart').options.barColor = '#0033CC';
-        $('#easypiechart-red').data('easyPieChart').update(Speed.toFixed(2));
+        //$('#easypiechart-red').data('easyPieChart').options.barColor = '#0033CC';
+        //$('#easypiechart-red').data('easyPieChart').update(Speed.toFixed(2));
         $('#red').text(Speed.toFixed(2));
         $('#blue').text(Dis.toFixed(2));
         $('#teal').text(time2.toFixed(2));
