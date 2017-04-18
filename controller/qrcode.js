@@ -34,6 +34,7 @@ qr_code = (function() {
         });
     };
     qr_code.prototype.getcode= function(req, res) {
+        console.log('#######',req.query,req.body);
         var _shoe_code=req.query.shoe_code;
         var _starttime=req.query.starttime;
         var _endtime=req.query.endtime;
