@@ -198,7 +198,7 @@ sqlMod = (function() {
                 var login_time=+(result[0].last_logintime);
                 var temp=+today-login_time;
                 console.log(today,login_time,temp);
-                if (temp>43200){
+                if (temp>432000){
                     return cb({
                         data:"relogin"
                     });

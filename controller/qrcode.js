@@ -27,13 +27,17 @@ qr_code = (function() {
     }
     qr_code.prototype.getmess= function(req, res) {
         return qr_codeMod.getmess(req.query, function(result) {
-            return res.render('show', {step_num: '700',dis:'1000',calory:'10000'});
-            return res.send(result);
+            var _starttime=req.query.starttime;
+            var _endtime=req.query.endtime;
+            var _code=req.query.code;
+            return res.render('showtable', {starttime: _starttime,endtime:_endtime,code:_code});
         });
     };
     qr_code.prototype.getcode= function(req, res) {
         var _shoe_code=req.query.shoe_code;
-        var text='http://www.demaciaspower.cn/getmess?shoe_code='+_shoe_code;
+        var _starttime=req.query.starttime;
+        var _endtime=req.query.endtime;
+        var text='http://www.demaciaspower.cn/getmess?shoe_code='+_shoe_code+'&starttime='+_starttime+'&endtime='+_endtime;
         var img = qr.image(text,{size :5});
         res.writeHead(200, {'Content-Type': 'image/png'});
         img.pipe(res);
