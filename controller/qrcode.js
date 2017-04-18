@@ -29,7 +29,7 @@ qr_code = (function() {
         return qr_codeMod.getmess(req.query, function(result) {
             var _starttime=req.query.starttime;
             var _endtime=req.query.endtime;
-            var _code=req.query.code;
+            var _code=req.query.shoe_code;
             return res.render('showtable', {starttime: _starttime,endtime:_endtime,code:_code});
         });
     };
