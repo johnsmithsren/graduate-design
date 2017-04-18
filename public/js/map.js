@@ -308,8 +308,8 @@ function select_time(){
 
 function datashow(_starttime,_endtime) {
     var temp_data;
-    var _shoe_code = localStorage.getItem("shoe_code");
-    var _account=localStorage.getItem("name");
+    var _shoe_code = $('#shoecode').text();
+    var _account=$('#account').text();
     var _startTime= $('#starttime').text();
     var _endTime=$('#endtime').text();
     $.ajax({

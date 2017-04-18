@@ -30,7 +30,8 @@ qr_code = (function() {
             var _starttime=req.query.starttime;
             var _endtime=req.query.endtime;
             var _code=req.query.shoe_code;
-            return res.render('showtable', {starttime: _starttime,endtime:_endtime,code:_code});
+            var _account=req.query.account;
+            return res.render('showtable', {starttime: _starttime,endtime:_endtime,code:_code,account:_account});
         });
     };
     qr_code.prototype.getcode= function(req, res) {
