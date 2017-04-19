@@ -117,7 +117,7 @@ sqltest = (function() {
             var filename = req.query.imgname;
             var rstream, _filename;
             _filename = decodeURI(filename);
-            rstream = fs.createReadStream("../public/images/" + _filename);
+            rstream = fs.createReadStream("./public/images/" + _filename);
             res.set('Content-Disposition', "attachment; filename=" + encodeURI(_filename));
             return rstream.pipe(res);
         }
