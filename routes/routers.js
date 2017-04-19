@@ -60,6 +60,7 @@ router.get('/user_account',ctrls.sql.user_account);
 router.get('/user/finish_task',ctrls.sql.finish_task);
 
 router.get('/user/delete_task',ctrls.sql.delete_task);
+router.get('/user/get_img',ctrls.sql.get_img);
 
 router.get('/user/add_task',ctrls.sql.add_task);
 router.get('/reset',ctrls.reset_pass);

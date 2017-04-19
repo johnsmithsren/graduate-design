@@ -4,7 +4,7 @@
 var sqltest;
 var model = require('../model/sqlMod');
 var sqlMod=new model();
-
+var fs=require('fs');
 sqltest = (function() {
     function sqltest() {
         this.model = new model();
@@ -111,6 +111,23 @@ sqltest = (function() {
         return sqlMod.add_task(req.query, function(result) {
             return res.send(result);
         });
+    };
+    sqltest.prototype.get_img= function(req, res) {
+        if (req.query.imgname) {
+            var filename = req.query.imgname;
+            var rstream, _filename;
+            _filename = decodeURI(filename);
+            rstream = fs.createReadStream("../public/images/shoe.png" + _filename);
+            res.set('Content-Disposition', "attachment; filename=" + encodeURI(_filename));
+            return rstream.pipe(res);
+        }
+        else {
+            var msg={
+                success:'false',
+                info: "需要文件名称"
+            }
+            return res.send(msg);
+        }
     };
     sqltest.prototype.delete_task = function(req, res) {
         return sqlMod.delete_task(req.query, function(result) {
