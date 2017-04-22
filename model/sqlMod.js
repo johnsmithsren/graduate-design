@@ -134,6 +134,7 @@ sqlMod = (function() {
                 data: result
             });
         });
+
     };
     sqlMod.prototype.get_userprofile= function(options, cb) {
         console.log(options);
