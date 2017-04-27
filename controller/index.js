@@ -23,9 +23,9 @@ exports.login = function(req, res) {
             else {
                 //_name=val.toString();
                 if (val) {
-                    res.render('index', {title: 'jim black', name: val.toString()});
+                    res.render('index', {name: val.toString()});
                 } else {
-                    res.render('index', {title: 'jim black', name: 'hello anybody'});
+                    res.render('index', {name: 'hello anybody'});
                 }
             }
         });
@@ -34,6 +34,22 @@ exports.login = function(req, res) {
         return logger.error("failed:", err);
     });
 };
+//exports.get_userInfo = function(req, res) {
+//    return Q.fcall(function() {
+//        sql='select * from account where account=?';
+//        return util.queryDatabase(sql, [], function(err, result) {
+//            if (err) {
+//                return logger.error("failed:", err);
+//            }
+//            return cb({
+//                data: result
+//            });
+//        });
+//
+//    }).fail(function(err) {
+//        return logger.error("failed:", err);
+//    });
+//};
 exports.log = function(req, res) {
         res.render('login');
 };
@@ -45,6 +61,31 @@ exports.to_dashboard = function(req, res) {
 };
 exports.to_chart = function(req, res) {
     res.render('chart');
+};
+exports.to_do_task = function(req, res) {
+    res.render('to_do_list');
+};
+exports.reset_pass = function(req, res) {
+    res.render('reset_pass');
+};
+
+exports.user_logout = function(req, res) {
+
+    //return Q.fcall(function() {
+    //    mem.set('user_name','', function(err, result) {
+    //        if (err) {
+    //            return {err:0}
+    //        }
+    //        else
+    //        {
+    //            return {mes:'ok'}
+    //        }
+    //    },3600*24);
+    //
+    //}).fail(function(err) {
+    //    return logger.error("failed:", err);
+    //});
+    res.redirect('/');
 };
 //exports.select = function(req,res) {
 //    connection.connect();

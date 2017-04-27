@@ -14,7 +14,7 @@ createConnectionPool = _.once(function() {
         user:'root',
         password:'qwe123123',
         port:'3306',
-        database:'bishe',
+        database:'bishe2',
         connectionLimit: 10,
         acquireTimeout: 10000,
         multipleStatements: true,
@@ -27,15 +27,15 @@ pool.on('enqueue', function() {
     return logger.info('no mysql connection is available');
 });
 exports.queryDatabase = function(sql, options, cb) {
-    logger.info(sql);
     Q.fcall(function() {
         return Q.nfcall(async.retry, 3, function(callback, result) {
+            //logger.info(callback);
             return pool.query(sql, options, callback);
         });
     }).then(function(result) {
         return cb(null, result[0]);
     }).fail(cb);
-    return logger.info('hello','world');
+    return  logger.info(mysql.format(sql, options));
 };
 exports.setmemcached = function(key, value, cb) {
     return client.set(key, value, function(err, result) {

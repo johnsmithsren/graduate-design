@@ -23,11 +23,15 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
+///user/login/sign_up
 app.use('/users', users);
 app.use('/sign_up', index);
 app.use('/dashboard', index);
 app.use('/charts', index);
 app.use('/getmess',index);
+app.use('/user_logout', index);
+app.use('/to_do_list',index);
+app.use('/reset',index);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

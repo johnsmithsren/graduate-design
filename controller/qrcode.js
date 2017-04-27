@@ -27,12 +27,21 @@ qr_code = (function() {
     }
     qr_code.prototype.getmess= function(req, res) {
         return qr_codeMod.getmess(req.query, function(result) {
-            return res.send(result);
+            var _starttime=req.query.starttime;
+            var _endtime=req.query.endtime;
+            var _code=req.query.shoe_code;
+            var _account=req.query.account;
+            return res.render('showtable', {starttime: _starttime,endtime:_endtime,code:_code,account:_account});
         });
     };
     qr_code.prototype.getcode= function(req, res) {
-        var text='http://www.demaciaspower.cn:3000/getmess?name=renjm';
-        var img = qr.image(text,{size :10});
+        console.log('#######',req.query,req.body);
+        var _shoe_code=req.query.shoe_code;
+        var _starttime=req.query.starttime;
+        var _endtime=req.query.endtime;
+        var _account=req.query.account;
+        var text='http://www.demaciaspower.cn/getmess?shoe_code='+_shoe_code+'&starttime='+_starttime+'&endtime='+_endtime+'&account='+_account;
+        var img = qr.image(text,{size :5});
         res.writeHead(200, {'Content-Type': 'image/png'});
         img.pipe(res);
         //return qr_codeMod.getcode(req.query, function(result) {
