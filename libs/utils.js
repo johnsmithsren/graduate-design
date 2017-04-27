@@ -10,11 +10,11 @@ var memcached=require('memjs');
 var client = memcached.Client.create()
 createConnectionPool = _.once(function() {
     return mysql.createPool({
-        host:'115.159.71.162',
+        host:'182.254.147.171',
         user:'root',
-        password:'qwe123123',
+        password:'zff123456',
         port:'3306',
-        database:'bishe2',
+        database:'smartshoe',
         connectionLimit: 10,
         acquireTimeout: 10000,
         multipleStatements: true,
