@@ -196,30 +196,32 @@ sqlMod = (function() {
     };
     sqlMod.prototype.shareverify= function(options, cb) {
         console.log(options)
+        var temp=''
         return Q.fcall(function () {
             var sql;
             sql = 'select * from account where account=?';
             return Q.nfcall(util.queryDatabase, sql, [options.account]);
         }).then(function (result) {
-            console.log(result);
-            if (result.length){
-                if(result[0].shareaccount==options.shareaccount){
-                    var sql;
-                    sql = 'update account set status=1 where account=?';
-                    util.queryDatabase('', sql, [options.account]);
-                    return cb({
-                        msg:"success",
-                        data:result[0]
-                    });
-                }
-                else{
-                    return cb({
-                        msg:'账户未授权'
-                    });
-                }
+            temp=result;
+            if (temp.length) {
+                var sql;
+                sql = 'update account set status=1 where account=?';
+                return Q.nfcall(util.queryDatabase, sql, [options.account]);
             }else{
                 return cb({
                     msg:'账号不存在'
+                });
+            }
+        }).then(function (result) {
+            if(temp[0].shareaccount==options.shareaccount){
+                return cb({
+                    msg:"success",
+                    data:temp[0]
+                });
+            }
+            else{
+                return cb({
+                    msg:'账户未授权'
                 });
             }
         }).fail(function (err) {
