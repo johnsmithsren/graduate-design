@@ -205,7 +205,7 @@ sqlMod = (function() {
             if (result.length){
                 if(result[0].shareaccount==options.shareaccount){
                     return cb({
-                        msg:'success'
+                        data:result[0]
                     });
                 }
                 else{
