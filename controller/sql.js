@@ -134,6 +134,16 @@ sqltest = (function() {
             return res.send(result);
         });
     };
+    sqltest.prototype.updateshareaccount = function(req, res) {
+        return sqlMod.updateshareaccount(req.query, function(result) {
+            return res.send(result);
+        });
+    };
+    sqltest.prototype.shareverify = function(req, res) {
+        return sqlMod.shareverify(req.query, function(result) {
+            return res.send(result);
+        });
+    };
     return sqltest;
 })();
 module.exports = sqltest;

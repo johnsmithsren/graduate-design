@@ -172,6 +172,56 @@ sqlMod = (function() {
             return logger.error("failed:", err);
         });
     };
+
+
+    sqlMod.prototype.updateshareaccount= function(options, cb) {
+        console.log(options)
+        return Q.fcall(function () {
+            var sql;
+            sql = 'select * from account where account=?';
+            return Q.nfcall(util.queryDatabase, sql, [options.account]);
+        }).then(function (result) {
+            if (result){
+                var sql;
+                sql = 'update account set shareaccount=? where account=?';
+                return Q.nfcall(util.queryDatabase, sql, [options.shareaccount,options.account]);
+            }
+        }).then(function () {
+            return cb({
+                msg:'success'
+            });
+        }).fail(function (err) {
+            return logger.error("failed:", err);
+        });
+    };
+    sqlMod.prototype.shareverify= function(options, cb) {
+        console.log(options)
+        return Q.fcall(function () {
+            var sql;
+            sql = 'select * from account where account=?';
+            return Q.nfcall(util.queryDatabase, sql, [options.account]);
+        }).then(function (result) {
+            console.log(result);
+            if (result.length){
+                if(result[0].shareaccount==options.shareaccount){
+                    return cb({
+                        msg:'success'
+                    });
+                }
+                else{
+                    return cb({
+                        msg:'账户未授权'
+                    });
+                }
+            }else{
+                return cb({
+                    msg:'账号不存在'
+                });
+            }
+        }).fail(function (err) {
+            return logger.error("failed:", err);
+        });
+    };
     sqlMod.prototype.user_account= function(options, cb) {
         return Q.fcall(function () {
             var sql;

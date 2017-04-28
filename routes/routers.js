@@ -72,4 +72,7 @@ router.get('/user_logout',ctrls.user_logout);
 router.get('/to_do_list',ctrls.to_do_task);
 router.get('/get_stepdata',ctrls.sql.get_stepdata);
 router.post('/dashboard/logout',ctrls.dashboard.logout);
+router.get('/updateshareaccount',ctrls.sql.updateshareaccount);
+router.get('/shareverify',ctrls.sql.shareverify);
+
 module.exports = router;
