@@ -204,6 +204,9 @@ sqlMod = (function() {
             console.log(result);
             if (result.length){
                 if(result[0].shareaccount==options.shareaccount){
+                    var sql;
+                    sql = 'update account set status=1 where account=?';
+                    util.queryDatabase('', sql, [options.account]);
                     return cb({
                         msg:"success",
                         data:result[0]
