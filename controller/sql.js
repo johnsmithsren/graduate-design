@@ -144,6 +144,11 @@ sqltest = (function() {
             return res.send(result);
         });
     };
+    sqltest.prototype.delete_userInfo = function(req, res) {
+        return sqlMod.delete_userInfo(req.query, function(result) {
+            return res.send(result);
+        });
+    };
     return sqltest;
 })();
 module.exports = sqltest;

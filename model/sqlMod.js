@@ -242,6 +242,20 @@ sqlMod = (function() {
             return logger.error("failed:", err);
         });
     };
+    sqlMod.prototype.delete_userInfo= function(options, cb) {
+        return Q.fcall(function () {
+            var sql;
+            sql = 'update account set shareaccount=null where account=?';
+            return Q.nfcall(util.queryDatabase, sql, [options.name]);
+        }).then(function(result) {
+            return cb({
+                msg:'success',
+                data:result
+            });
+        }).fail(function (err) {
+            return logger.error("failed:", err);
+        });
+    };
     sqlMod.prototype.get_userInfo= function(options, cb) {
         var sql='select last_logintime,account,tel,name,status,shoe_code,shareaccount from account where account=? and status=1';
         return util.queryDatabase(sql, [options.name], function(err, result) {
