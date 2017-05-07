@@ -102,7 +102,7 @@ sqlMod = (function() {
         });
     };
     sqlMod.prototype.select_map_info= function(options, cb) {
-        var today=new Date().getTime();
+        var today=new Date().getTime()-60*60*10;
         var _starttime=options.startTime;
         var _endtime=options.endTime;
         _starttime=_starttime.substring(0,10);
