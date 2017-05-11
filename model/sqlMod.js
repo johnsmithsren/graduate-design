@@ -383,7 +383,7 @@ sqlMod = (function() {
         if (temp.length) {
             return Q.fcall(function () {
                 var sql;
-                sql = 'select * from account where name=?';
+                sql = 'select * from account where account=?';
                 return Q.nfcall(util.queryDatabase, sql, [options.name]);
             }).then(function (result) {
                 mem.get(name, function (err, val) {
