@@ -10,6 +10,7 @@ html
     .error
     body
         .row
+            ._error
             .col-xs-10.col-xs-offset-1.col-sm-8.col-sm-offset-2.col-md-4.col-md-offset-4
                 .login-panel.panel.panel-default
                     .panel-heading 修改密码
@@ -63,6 +64,13 @@ html
                         dataType: "json",
                         success: function (data) {
                             if (data) {
+                                var temp1 = '<div class="alert alert-warning">' +
+                                        '<a href="#" class="close" data-dismiss="alert">' +
+                                        '&times;' +
+                                        '</a>' +
+                                        '<strong>修改成功！</strong>' +
+                                        '</div>'
+                                $("._error").append(temp1);
                             }
                         }
                     });
