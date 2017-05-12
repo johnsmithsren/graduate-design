@@ -541,14 +541,14 @@ sqlMod = (function() {
     sqlMod.prototype.set_user_pass= function(options, cb) {
         return Q.fcall(function() {
             var account=options.account;
-            var _sql='select * from account where account=?'
+            var _sql='select * from account where name=?'
             return Q.nfcall(util.queryDatabase, _sql, [account]);
         }).then(function(result) {
             if (result.length){
                 var pwd=options.pwd;
                 var account=options.account;
                 var sql;
-                sql='update account set update_time=unix_timestamp(now()),pwd=? where account=? ';
+                sql='update account set update_time=unix_timestamp(now()),pwd=? where name=? ';
                 return Q.nfcall(util.queryDatabase, sql, [pwd,account]);
             }
             else{
