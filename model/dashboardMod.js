@@ -11,7 +11,7 @@ dash_board = (function() {
         this.options = options;
     }
     dash_board.prototype.logout = function(options, cb) {
-        sql='update account set status=0,update_time=unix_timestamp(now()),last_logintime=unix_timestamp(now()) where name=?';
+        sql='update account set status=0,update_time=unix_timestamp(now()),last_logintime=unix_timestamp(now()) where account=?';
         return util.queryDatabase(sql, [options.user_name], function(err, result) {
             if (err) {
                 return logger.error("failed:", err);
