@@ -386,14 +386,14 @@ sqlMod = (function() {
                 sql = 'select * from account where account=?';
                 return Q.nfcall(util.queryDatabase, sql, [options.name]);
             }).then(function (result) {
-                mem.get(name, function (err, val) {
-                    if (err) {
-                        return err;
-                    }
-                    else {
-                        if (val) {
-                            console.log('code', val.toString(), 'code2', options.code);
-                            if (val.toString() == options.code) {
+                //mem.get(name, function (err, val) {
+                //    if (err) {
+                //        return err;
+                //    }
+                //    else {
+                //        if (val) {
+                //            console.log('code', val.toString(), 'code2', options.code);
+                //            if (val.toString() == options.code) {
                                 if (result.length) {
                                     var pass = result[0].pwd;
                                     var _shoe_code=result[0].shoe_code;
@@ -429,19 +429,19 @@ sqlMod = (function() {
                                         err: "密码用户名有误，请检查"
                                     });
                                 }
-                            }
-                            else {
-                                return cb({
-                                    err: "验证码有误，请检查"
-                                });
-                            }
-                        } else {
-                            return cb({
-                                err: "验证码失效，请重发验证码"
-                            });
-                        }
-                    }
-                });
+                            //}
+                            //else {
+                            //    return cb({
+                            //        err: "验证码有误，请检查"
+                            //    });
+                            //}
+                        //} else {
+                        //    return cb({
+                        //        err: "验证码失效，请重发验证码"
+                        //    });
+                        //}
+                    //}
+                //});
             }).fail(function (err) {
                 return cb({
                     err: "inner failed"
