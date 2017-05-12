@@ -19,7 +19,7 @@ var transporter = nodemailer.createTransport({
     port: 465,
     auth: {
         user: "1149104294@qq.com", // 账号
-        pass: "rjm10201993" // 密码
+        pass: "qwe123123" // 密码
     }
 });
 //exports.send_code = function(req, res) {
