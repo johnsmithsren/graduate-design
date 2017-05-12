@@ -378,53 +378,46 @@ sqlMod = (function() {
 
     //};
     sqlMod.prototype.user_verify= function(options, cb) {
-        var temp=options.code;
-        var name=options.account;
-        if (temp.length) {
-            return Q.fcall(function () {
-                var sql;
-                sql = 'select * from account where account=?';
-                return Q.nfcall(util.queryDatabase, sql, [options.name]);
-            }).then(function (result) {
-                if (result.length) {
-                    var pass = result[0].pwd;
-                    var _shoe_code=result[0].shoe_code;
-                    console.log(_shoe_code);
-                    var follow_pass = options.pwd;
-                    if (pass != follow_pass) {
-                        return cb({
-                            err: "密码用户名有误"
-                        });
-                    }
-                    else {
-                        var _sql;
-                        var token=uuid.v4();
-                        _sql = 'update account set status=1,last_logintime=unix_timestamp(now()) where account=?';
-                        return util.queryDatabase(_sql, [options.name], function (err, result) {
-                            return cb({
-                                msg: _shoe_code,
-                                token:token
-                            });
-                        });
-                    }
-                } else {
+        var temp = options.code;
+        var name = options.account;
+        return Q.fcall(function () {
+            var sql;
+            sql = 'select * from account where account=?';
+            return Q.nfcall(util.queryDatabase, sql, [options.name]);
+        }).then(function (result) {
+            if (result.length) {
+                var pass = result[0].pwd;
+                var _shoe_code = result[0].shoe_code;
+                console.log(_shoe_code);
+                var follow_pass = options.pwd;
+                if (pass != follow_pass) {
                     return cb({
-                        err: "密码用户名有误，请检查"
+                        err: "密码用户名有误"
                     });
                 }
-            }).fail(function (err) {
+                else {
+                    var _sql;
+                    var token = uuid.v4();
+                    _sql = 'update account set status=1,last_logintime=unix_timestamp(now()) where account=?';
+                    return util.queryDatabase(_sql, [options.name], function (err, result) {
+                        return cb({
+                            msg: _shoe_code,
+                            token: token
+                        });
+                    });
+                }
+            } else {
                 return cb({
-                    err: "inner failed"
+                    err: "密码用户名有误，请检查"
                 });
-                return logger.error("failed:", err);
-            });
-        }else{
+            }
+        }).fail(function (err) {
             return cb({
-                err: 'error'
+                err: "inner failed"
             });
-        }
-
-    };
+            return logger.error("failed:", err);
+        });
+    }
 
 
     sqlMod.prototype.getnews= function(options, cb) {
