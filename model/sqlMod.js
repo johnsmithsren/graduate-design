@@ -386,62 +386,32 @@ sqlMod = (function() {
                 sql = 'select * from account where account=?';
                 return Q.nfcall(util.queryDatabase, sql, [options.name]);
             }).then(function (result) {
-                //mem.get(name, function (err, val) {
-                //    if (err) {
-                //        return err;
-                //    }
-                //    else {
-                //        if (val) {
-                //            console.log('code', val.toString(), 'code2', options.code);
-                //            if (val.toString() == options.code) {
-                                if (result.length) {
-                                    var pass = result[0].pwd;
-                                    var _shoe_code=result[0].shoe_code;
-                                    console.log(_shoe_code);
-                                    var follow_pass = options.pwd;
-                                    if (pass != follow_pass) {
-                                        return cb({
-                                            err: "密码用户名有误"
-                                        });
-                                    }
-                                    else {
-                                        var _sql;
-                                        var token=uuid.v4();
-                                        _sql = 'update account set status=1,last_logintime=unix_timestamp(now()) where account=?';
-                                        mem.set(token,'1', function(err, result) {
-                                            if (err) {
-                                                console.log(err);
-                                            }
-                                            else
-                                            {
-                                                console.log("success");
-                                            }
-                                        },43200);
-                                        return util.queryDatabase(_sql, [options.name], function (err, result) {
-                                            return cb({
-                                                msg: _shoe_code,
-                                                token:token
-                                            });
-                                        });
-                                    }
-                                } else {
-                                    return cb({
-                                        err: "密码用户名有误，请检查"
-                                    });
-                                }
-                            //}
-                            //else {
-                            //    return cb({
-                            //        err: "验证码有误，请检查"
-                            //    });
-                            //}
-                        //} else {
-                        //    return cb({
-                        //        err: "验证码失效，请重发验证码"
-                        //    });
-                        //}
-                    //}
-                //});
+                if (result.length) {
+                    var pass = result[0].pwd;
+                    var _shoe_code=result[0].shoe_code;
+                    console.log(_shoe_code);
+                    var follow_pass = options.pwd;
+                    if (pass != follow_pass) {
+                        return cb({
+                            err: "密码用户名有误"
+                        });
+                    }
+                    else {
+                        var _sql;
+                        var token=uuid.v4();
+                        _sql = 'update account set status=1,last_logintime=unix_timestamp(now()) where account=?';
+                        return util.queryDatabase(_sql, [options.name], function (err, result) {
+                            return cb({
+                                msg: _shoe_code,
+                                token:token
+                            });
+                        });
+                    }
+                } else {
+                    return cb({
+                        err: "密码用户名有误，请检查"
+                    });
+                }
             }).fail(function (err) {
                 return cb({
                     err: "inner failed"
