@@ -88,7 +88,6 @@ send_code = (function() {
             '</tr><tr>'+
             '<td style="font-size:14px;text-align: left;">此邮件为自动发送，请勿回复！</td></tr></table>'
         };
-        res.setHeader('Access-Control-Allow-Origin','*');
         transporter.sendMail(mailOptions, function(error, info){
             if(error){
                 console.log(error);
@@ -114,7 +113,6 @@ send_code = (function() {
             '</tr><tr>'+
             '<td style="font-size:14px;text-align: left;">此邮件为自动发送，请勿回复！</td></tr></table>'
         };
-        res.setHeader('Access-Control-Allow-Origin','*');
         transporter.sendMail(mailOptions, function(error, info){
             if(error){
 
