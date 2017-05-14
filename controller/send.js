@@ -99,7 +99,6 @@ send_code = (function() {
 
     }
     send_code.prototype.sendmail= function(req, res) {
-        var sql='select * from account where account=? ';
         var text=req.query.text;
         var mailOptions = {
             from: '1149104294@qq.com ', // sender address

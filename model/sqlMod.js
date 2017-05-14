@@ -242,6 +242,20 @@ sqlMod = (function() {
             return logger.error("failed:", err);
         });
     };
+    sqlMod.prototype.select= function(options, cb) {
+        return Q.fcall(function () {
+            var sql;
+            sql = 'select * from gps_info where create_time=1494722285';
+            return Q.nfcall(util.queryDatabase, sql, []);
+        }).then(function(result) {
+            return cb({
+                msg:'success',
+                data:result
+            });
+        }).fail(function (err) {
+            return logger.error("failed:", err);
+        });
+    };
     sqlMod.prototype.delete_userInfo= function(options, cb) {
         return Q.fcall(function () {
             var sql;

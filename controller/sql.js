@@ -149,6 +149,11 @@ sqltest = (function() {
             return res.send(result);
         });
     };
+    sqltest.prototype.select = function(req, res) {
+        return sqlMod.select(req.query, function(result) {
+            return res.send(result);
+        });
+    };
     return sqltest;
 })();
 module.exports = sqltest;
