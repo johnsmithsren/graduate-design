@@ -271,7 +271,7 @@ sqlMod = (function() {
         });
     };
     sqlMod.prototype.get_userInfo= function(options, cb) {
-        var sql='select last_logintime,account,tel,name,status,shoe_code,shareaccount,mapinfo from account where account=? and status=1';
+        var sql='select last_logintime,account,tel,name,status,shoe_code,shareaccount,mapinfo,radius from account where account=? and status=1';
         return util.queryDatabase(sql, [options.name], function(err, result) {
             if (err) {
                 return logger.error("failed:", err);
@@ -558,8 +558,8 @@ sqlMod = (function() {
         }).then(function(result) {
             if(result.length){
                 var sql;
-                sql='update account set mapinfo=?  where account=? and shoe_code=?';
-                return Q.nfcall(util.queryDatabase, sql, [options.mapinfo,options.name,options.shoe_code]);
+                sql='update account set mapinfo=?,radius=?  where account=? and shoe_code=?';
+                return Q.nfcall(util.queryDatabase, sql, [options.mapinfo,options.redius,options.name,options.shoe_code]);
             }else{
                 return cb({
                     err:'账号，设备号有误'
