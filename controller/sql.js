@@ -154,6 +154,11 @@ sqltest = (function() {
             return res.send(result);
         });
     };
+    sqltest.prototype.setmapinfo = function(req, res) {
+        return sqlMod.setmapinfo(req.query, function(result) {
+            return res.send(result);
+        });
+    };
     return sqltest;
 })();
 module.exports = sqltest;

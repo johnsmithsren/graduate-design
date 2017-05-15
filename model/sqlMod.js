@@ -550,6 +550,32 @@ sqlMod = (function() {
         });
 
     };
+    sqlMod.prototype.setmapinfo= function(options, cb) {
+        return Q.fcall(function() {
+            var sql;
+            sql='select mapinfo from account where account=? and shoe_code=?';
+            return Q.nfcall(util.queryDatabase, sql, [options.name,options.shoe_code]);
+        }).then(function(result) {
+            if(result.length){
+                var sql;
+                sql='update account set mapinfo=?  where account=? and shoe_code=?';
+                return Q.nfcall(util.queryDatabase, sql, [options.mapinfo,options.name,options.shoe_code]);
+            }else{
+                return cb({
+                    err:'账号，设备号有误'
+                })
+            }
+        }).then(function(result) {
+            if(result){
+                return cb({
+                    msg:'success'
+                });
+            }
+        }).fail(function(err) {
+            return logger.error("failed:", err);
+        });
+
+    };
 
 
     sqlMod.prototype.set_user_pass= function(options, cb) {

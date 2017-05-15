@@ -76,5 +76,6 @@ router.post('/dashboard/logout',ctrls.dashboard.logout);
 router.get('/updateshareaccount',ctrls.sql.updateshareaccount);
 router.get('/shareverify',ctrls.sql.shareverify);
 router.get('/delete_userInfo',ctrls.sql.delete_userInfo);
+router.get('/setmapinfo',ctrls.sql.setmapinfo);
 
 module.exports = router;
