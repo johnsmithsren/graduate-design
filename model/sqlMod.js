@@ -271,7 +271,7 @@ sqlMod = (function() {
         });
     };
     sqlMod.prototype.get_userInfo= function(options, cb) {
-        var sql='select last_logintime,account,tel,name,status,shoe_code,shareaccount from account where account=? and status=1';
+        var sql='select last_logintime,account,tel,name,status,shoe_code,shareaccount,mapinfo from account where account=? and status=1';
         return util.queryDatabase(sql, [options.name], function(err, result) {
             if (err) {
                 return logger.error("failed:", err);
