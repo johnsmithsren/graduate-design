@@ -27,14 +27,14 @@ qr_code = (function() {
     }
     qr_code.prototype.getmess= function(req, res) {
         return qr_codeMod.getmess(req.query, function(result) {
-            console.log("@@@@@@@",req.query['amp;starttime']);
+
             if(req.query['amp;starttime']){
                 var _starttime=req.query['amp;starttime'];
                 var _endtime=req.query['amp;endtime'];
                 var _code=req.query['shoe_code'];
                 var _account=req.query['amp;account'];
             }else{
-                var _shoe_code=req.query.shoe_code;
+                var _code=req.query.shoe_code;
                 var _starttime=req.query.starttime;
                 var _endtime=req.query.endtime;
                 var _account=req.query.account;
