@@ -27,6 +27,7 @@ qr_code = (function() {
     }
     qr_code.prototype.getmess= function(req, res) {
         return qr_codeMod.getmess(req.query, function(result) {
+            console.log('@!@!@!@!@',req.query);
 
             if(req.query['amp;starttime']){
                 var _starttime=req.query['amp;starttime'];
