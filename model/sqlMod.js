@@ -159,7 +159,6 @@ sqlMod = (function() {
     };
     sqlMod.prototype.getlastepinfo= function(options, cb) {
         console.log(options);
-        var _data=[];
         return Q.fcall(function () {
             var sql;
             sql = 'select * from gps_info where latitude>0 and shoe_code=? order by create_time desc limit 1';
@@ -175,9 +174,9 @@ sqlMod = (function() {
                 result[i].longitude=_temp_lon;
                 result[i].latitude=_temp_lat;
             }
-            _data.push(result);
+
             return cb({
-                data: _data
+                data: result
             });
         }).fail(function (err) {
             return logger.error("failed:", err);
