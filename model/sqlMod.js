@@ -109,7 +109,7 @@ sqlMod = (function() {
         _endtime=_endtime.substring(0,10);
         today=JSON.stringify(today).substring(0,10);
         console.log('-------',options);
-        var sql="select a.*,b.weight,b. from gps_info a left join account b on a.shoe_code=b.shoe_code where a.shoe_code=? and latitude!=0 and ";
+        var sql="select a.*,b.weight,b.mapinfo from gps_info a left join account b on a.shoe_code=b.shoe_code where a.shoe_code=? and latitude!=0 and ";
         if(_starttime && _endtime){
             sql+="a.update_time between "+ (mysql.escape(_starttime))+ " and "+ (mysql.escape(_endtime))+" "
         }else{
