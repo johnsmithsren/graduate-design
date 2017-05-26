@@ -162,7 +162,7 @@ sqlMod = (function() {
         var _data=[];
         return Q.fcall(function () {
             var sql;
-            sql = 'select * from gps_info where shoe_code=? order by create_time desc limit 1';
+            sql = 'select * from gps_info where latitude>0 and shoe_code=? order by create_time desc limit 1';
             return Q.nfcall(util.queryDatabase, sql, [options.shoe_code]);
         }).then(function (result) {
             _data.push(result);
