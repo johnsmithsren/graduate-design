@@ -46,9 +46,15 @@ qr_code = (function() {
     qr_code.prototype.getcode= function(req, res) {
         console.log('#######',req.query,req.body);
         var _shoe_code=req.query.shoe_code;
-        var _starttime=req.query.starttime;
-        var _endtime=req.query.endtime;
-        var _account=req.query.account;
+        if(req.query['amp;starttime']){
+            var _starttime=req.query['amp;starttime'];
+            var _endtime=req.query['amp;endtime'];
+            var _account=req.query['amp;account'];
+        }else{
+            var _starttime=req.query.starttime;
+            var _endtime=req.query.endtime;
+            var _account=req.query.account;
+        }
         var text='http://www.demaciaspower.cn/getmess?shoe_code='+_shoe_code+'&starttime='+_starttime+'&endtime='+_endtime+'&account='+_account;
         var img = qr.image(text,{size :5});
         res.writeHead(200, {'Content-Type': 'image/png'});

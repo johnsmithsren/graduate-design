@@ -59,6 +59,7 @@ router.get('/login',ctrls.log);
 router.get('/user_account',ctrls.sql.user_account);
 router.get('/user/finish_task',ctrls.sql.finish_task);
 router.get('/testshowinfo',ctrls.sql.select);
+router.get('/getlastepinfo',ctrls.sql.getlastepinfo);
 
 router.get('/user/delete_task',ctrls.sql.delete_task);
 router.get('/user/get_img',ctrls.sql.get_img);
