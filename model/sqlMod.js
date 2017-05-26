@@ -165,6 +165,19 @@ sqlMod = (function() {
             sql = 'select * from gps_info where latitude>0 and shoe_code=? order by create_time desc limit 1';
             return Q.nfcall(util.queryDatabase, sql, [options.shoe_code]);
         }).then(function (result) {
+            if (err) {
+                return logger.error("failed:", err);
+            }
+            var info,i, len;
+            for (i = 0, len = result.length; i < len; i++) {
+                info = result[i];
+                var temp_lon=info.longitude;
+                var temp_lat=info.latitude;
+                var _temp_lon=parseInt(temp_lon/100)+(temp_lon%100)/60;
+                var _temp_lat=parseInt(temp_lat/100)+(temp_lat%100)/60;
+                result[i].longitude=_temp_lon;
+                result[i].latitude=_temp_lat;
+            }
             _data.push(result);
             return cb({
                 data: _data
