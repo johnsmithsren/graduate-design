@@ -165,9 +165,6 @@ sqlMod = (function() {
             sql = 'select * from gps_info where latitude>0 and shoe_code=? order by create_time desc limit 1';
             return Q.nfcall(util.queryDatabase, sql, [options.shoe_code]);
         }).then(function (result) {
-            if (err) {
-                return logger.error("failed:", err);
-            }
             var info,i, len;
             for (i = 0, len = result.length; i < len; i++) {
                 info = result[i];
